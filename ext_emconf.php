@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Rubin Event Manager',
-    'description' => 'A simple Event Management Extension für TYPO3',
+    'description' => 'A simple Event Management Extension for TYPO3 CMS',
     'category' => 'plugin',
     'state' => 'stable',
     'author' => 'Lukas Doerr',
