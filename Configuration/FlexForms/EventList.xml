@@ -1,0 +1,106 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.sheet.general</sheetTitle>
+                <type>array</type>
+                <el>
+
+                    <settings.storagePid>
+                        <label>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.storagePid</label>
+                        <config>
+                            <type>group</type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.storagePid>
+
+                    <settings.pidList>
+                        <label>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.pidList</label>
+                        <config>
+                            <type>group</type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.pidList>
+
+                    <settings.listStyle>
+                        <label>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.listStyle</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.listStyle.0</numIndex>
+                                    <numIndex index="1">0</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.listStyle.1</numIndex>
+                                    <numIndex index="1">1</numIndex>
+                                </numIndex>
+                                <numIndex index="2" type="array">
+                                    <numIndex index="0">LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.listStyle.2</numIndex>
+                                    <numIndex index="1">2</numIndex>
+                                </numIndex>
+                            </items>
+                            <default>1</default>
+                            <minitems>1</minitems>
+                            <maxitems>1</maxitems>
+                        </config>
+                    </settings.listStyle>
+
+                    <settings.btnMoreBehavior>
+                        <label>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.btnMoreBehavior</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items type="array">
+                                <numIndex index="0" type="array">
+                                    <numIndex index="0">LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.btnMoreBehavior.0</numIndex>
+                                    <numIndex index="1">0</numIndex>
+                                </numIndex>
+                                <numIndex index="1" type="array">
+                                    <numIndex index="0">LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.btnMoreBehavior.1</numIndex>
+                                    <numIndex index="1">1</numIndex>
+                                </numIndex>
+                            </items>
+                            <minitems>1</minitems>
+                            <maxitems>1</maxitems>
+                        </config>
+                        <onChange>reload</onChange>
+                    </settings.btnMoreBehavior>
+
+                    <settings.pidShow>
+                        <label>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.pidShow</label>
+                        <displayCond>FIELD:settings.btnMoreBehavior:=:1</displayCond>
+                        <config>
+                            <type>group</type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <required>true</required>
+                        </config>
+                    </settings.pidShow>
+
+                    <settings.limit>
+                        <label>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.limit</label>
+                        <config>
+                            <type>number</type>
+                            <default>10</default>
+                            <range>
+                                <lower>1</lower>
+                                <upper>100</upper>
+                            </range>
+                        </config>
+                    </settings.limit>
+                    
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

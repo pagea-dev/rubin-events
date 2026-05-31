@@ -1,0 +1,16 @@
+page {
+
+    includeCSS {
+
+        rubinevents = EXT:rubin_events/Resources/Private/Scss/rubinevents.scss
+        rubinevents.outputfile = EXT:rubin_events/Resources/Public/Css/rubinevents.css
+        rubinevents.outputStyle = expanded
+        rubinevents.sourceMap = true
+    }
+
+}
+
+[{$rubinevents.useTinyslider} == 1]
+    page.includeCSS.tinyslider = EXT:rubin_events/Resources/Public/Css/Lib/tiny-slider.min.css
+    page.includeJSFooter.tinyslider = EXT:rubin_events/Resources/Public/JavaScript/Lib/tiny-slider.js
+[end]

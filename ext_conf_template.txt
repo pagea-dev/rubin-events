@@ -1,0 +1,11 @@
+# cat=basic/int/10; type=int+; label=Default Zoom Level (1=world, 10=city, 18=street)
+defaultZoom = 12
+
+# cat=basic/string/20; type=string; label=Default Latitude (center of map on load)
+defaultLat = 51.5
+
+# cat=basic/string/30; type=string; label=Default Longitude (center of map on load)
+defaultLon = 9.5
+
+# cat=basic/int/40; type=int+; label=Storage PID (Backend record folder)
+storagePid = 14

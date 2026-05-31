@@ -1,0 +1,54 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:r="http://typo3.org/ns/PageaDev/RubinEvents/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <div class="bs-table-wrapper">
+        <div class="row head-row">
+            <div class="col-12 col-lg-2">
+                <strong><f:translate key="bslist.col.date" extensionName="RubinEvents" /></strong>
+            </div>
+            <div class="col-12 col-lg-2">
+                <strong><f:translate key="bslist.col.title" extensionName="RubinEvents" /></strong>
+            </div>
+            <div class="col-12 col-lg-4">
+                <strong><f:translate key="bslist.col.description" extensionName="RubinEvents" /></strong>
+            </div>
+            <div class="col-12 col-lg-3">
+                <strong><f:translate key="bslist.col.location" extensionName="RubinEvents" /></strong>
+            </div>
+            <div class="col-12 col-lg-1">
+                &nbsp;
+            </div>
+        </div>
+
+        <div class="row spacer">
+            <div class="col-12">
+                <div class="line"></div>
+            </div>
+        </div>
+
+
+        <f:for each="{events}" as="event" iteration="i">
+            <div class="row event-single event-{i.index} uid-{event.uid}">
+                <div class="col-12 col-lg-2 item">
+                    <r:format.localizedDate date="{event.eventStart}" format="d. M Y" />
+                    <br>
+                    <r:format.localizedDate date="{event.eventStart}" format="H:i" /> <f:translate key="bslist.time.suffix" extensionName="RubinEvents" />
+                </div>
+                <div class="col-12 col-lg-2 item">
+                    <f:format.crop maxCharacters="45" append="..." respectWordBoundaries="1" respectHtml="1">{event.title}</f:format.crop>
+                </div>
+                <div class="col-12 col-lg-4 item">
+                    <i><f:format.crop maxCharacters="250" append="..." respectWordBoundaries="1" respectHtml="1">{event.teaser}</f:format.crop></i>
+                </div>
+                <div class="col-12 col-lg-3 item">
+                    {event.location}
+                </div>
+                <div class="col-12 col-lg-1 item">
+                    <f:link.action class="btn btn-primary" action="show" pageUid="{settings.pidShow}"><i class="rubinicon-arrow_forward"></i> </f:link.action>
+                </div>
+            </div>
+        </f:for>
+    </div>
+
+</html>

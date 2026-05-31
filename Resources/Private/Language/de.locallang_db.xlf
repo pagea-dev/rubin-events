@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-05-24T00:00:00Z" product-name="rubin_events">
+        <header/>
+        <body>
+            <trans-unit id="tx_rubinevents_domain_model_event">
+                <source>Event</source>
+                <target>Veranstaltung</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.event_start">
+                <source>Event Start</source>
+                <target>Beginn</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.event_start.description">
+                <source>The date and time when the event begins.</source>
+                <target>Datum und Uhrzeit, zu der die Veranstaltung beginnt.</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.event_end">
+                <source>Event End</source>
+                <target>Ende</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.event_end.description">
+                <source>The date and time when the event ends. Leave empty for single-day events.</source>
+                <target>Datum und Uhrzeit, zu der die Veranstaltung endet. Bei eintägigen Veranstaltungen leer lassen.</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.title">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.title.description">
+                <source>The name of the event as it will appear publicly.</source>
+                <target>Der Name der Veranstaltung, wie er öffentlich angezeigt wird.</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.teaser">
+                <source>Teaser</source>
+                <target>Teaser</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.teaser.description">
+                <source>A short summary shown in list views and previews.</source>
+                <target>Eine kurze Zusammenfassung für Listenansichten und Vorschauen.</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.description">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.description.description">
+                <source>Full description with all details about the event.</source>
+                <target>Ausführliche Beschreibung mit allen Details zur Veranstaltung.</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.location">
+                <source>Location</source>
+                <target>Veranstaltungsort</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.location.description">
+                <source>Name or address of the venue where the event takes place.</source>
+                <target>Name oder Adresse des Ortes, an dem die Veranstaltung stattfindet.</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.map_location">
+                <source>Location on Map</source>
+                <target>Standort auf Karte</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.map_location.description">
+                <source>Pick the event location on the map. Coordinates are saved automatically.</source>
+                <target>Wähle den Veranstaltungsort auf der Karte aus. Die Koordinaten werden automatisch gespeichert.</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.lat">
+                <source>Latitude</source>
+                <target>Breitengrad</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.lat.description">
+                <source>Geographic latitude of the event location (e.g. 51.9608).</source>
+                <target>Geografischer Breitengrad des Veranstaltungsortes (z.B. 51.9608).</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.lon">
+                <source>Longitude</source>
+                <target>Längengrad</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.lon.description">
+                <source>Geographic longitude of the event location (e.g. 9.4587).</source>
+                <target>Geografischer Längengrad des Veranstaltungsortes (z.B. 9.4587).</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.creator">
+                <source>Creator</source>
+                <target>Ersteller</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.creator.description">
+                <source>The frontend user who is responsible for this event.</source>
+                <target>Der Frontend-Benutzer, der für diese Veranstaltung verantwortlich ist.</target>
+            </trans-unit>
+
+            <trans-unit id="tx_rubinevents_domain_model_event.contacts">
+                <source>Contacts</source>
+                <target>Ansprechpartner</target>
+            </trans-unit>
+            <trans-unit id="tx_rubinevents_domain_model_event.contacts.description">
+                <source>Frontend users that can be contacted regarding this event.</source>
+                <target>Frontend-Benutzer, die bei Fragen zu dieser Veranstaltung kontaktiert werden können.</target>
+            </trans-unit>
+
+            <!-- Map picker -->
+            <trans-unit id="map.empty"><source>No location set — click on the map</source><target>Kein Standort gesetzt — klicke auf die Karte</target></trans-unit>
+            <trans-unit id="map.clear"><source>Clear location</source><target>Standort löschen</target></trans-unit>
+
+            <!-- Dashboard widget -->
+            <trans-unit id="widget.createButton.title"><source>Create new event</source><target>Neue Veranstaltung erstellen</target></trans-unit>
+            <trans-unit id="widget.col.date"><source>Date</source><target>Datum</target></trans-unit>
+            <trans-unit id="widget.col.title"><source>Title</source><target>Titel</target></trans-unit>
+            <trans-unit id="widget.col.teaser"><source>Teaser</source><target>Teaser</target></trans-unit>
+            <trans-unit id="widget.col.location"><source>Location</source><target>Veranstaltungsort</target></trans-unit>
+
+            <trans-unit id="widget.eventList.title">
+                <source>Rubin Event List</source>
+                <target>Rubin Veranstaltungsliste</target>
+            </trans-unit>
+            <trans-unit id="widget.eventList.description">
+                <source>Shows a simple list of your created events.</source>
+                <target>Zeigt eine einfache Liste deiner erstellten Veranstaltungen.</target>
+            </trans-unit>
+
+            <!-- Plugin labels -->
+            <trans-unit id="plugin.rubinevents_eventlist">
+                <source>Events: List</source>
+                <target>Veranstaltungen: Liste</target>
+            </trans-unit>
+            <trans-unit id="plugin.rubinevents_eventlist.description">
+                <source>Shows a list of upcoming events.</source>
+                <target>Zeigt eine Liste bevorstehender Veranstaltungen.</target>
+            </trans-unit>
+
+            <trans-unit id="plugin.rubinevents_eventshow">
+                <source>Events: Detail</source>
+                <target>Veranstaltungen: Detailansicht</target>
+            </trans-unit>
+            <trans-unit id="plugin.rubinevents_eventshow.description">
+                <source>Shows the detail view of a single event.</source>
+                <target>Zeigt die Detailansicht einer einzelnen Veranstaltung.</target>
+            </trans-unit>
+
+            <trans-unit id="plugin.rubinevents_eventarchive">
+                <source>Events: Archive</source>
+                <target>Veranstaltungen: Archiv</target>
+            </trans-unit>
+            <trans-unit id="plugin.rubinevents_eventarchive.description">
+                <source>Shows a list of past events.</source>
+                <target>Zeigt eine Liste vergangener Veranstaltungen.</target>
+            </trans-unit>
+
+            <!-- FlexForm labels -->
+            <trans-unit id="flexform.sheet.general">
+                <source>Settings</source>
+                <target>Einstellungen</target>
+            </trans-unit>
+
+            <trans-unit id="flexform.settings.listStyle">
+                <source>List Style</source>
+                <target>Listenstil</target>
+            </trans-unit>
+            <trans-unit id="flexform.settings.listStyle.0">
+                <source>Slider (requires TinySlider)</source>
+                <target>Slider (erfordert TinySlider)</target>
+            </trans-unit>
+            <trans-unit id="flexform.settings.listStyle.1">
+                <source>Normal Table</source>
+                <target>Normale Tabelle</target>
+            </trans-unit>
+            <trans-unit id="flexform.settings.listStyle.2">
+                <source>Bootstrap Table</source>
+                <target>Bootstrap Tabelle</target>
+            </trans-unit>
+
+            <trans-unit id="flexform.settings.btnMoreBehavior">
+                <source>More Button Behavior</source>
+                <target>Verhalten des Mehr-Buttons</target>
+            </trans-unit>
+            <trans-unit id="flexform.settings.btnMoreBehavior.description">
+                <source>Modal requires Bootstrap 5+</source>
+                <target>Modal erfordert Bootstrap 5+</target>
+            </trans-unit>
+            <trans-unit id="flexform.settings.btnMoreBehavior.0">
+                <source>Open modal</source>
+                <target>Modal öffnen</target>
+            </trans-unit>
+            <trans-unit id="flexform.settings.btnMoreBehavior.1">
+                <source>Open defined detail page</source>
+                <target>Definierte Detailseite öffnen</target>
+            </trans-unit>
+
+            <trans-unit id="flexform.settings.storagePid">
+                <source>Storage Folder</source>
+                <target>Speicherordner</target>
+            </trans-unit>
+
+            <trans-unit id="flexform.settings.pidShow">
+                <source>Detail Page</source>
+                <target>Detailseite</target>
+            </trans-unit>
+
+            <trans-unit id="flexform.settings.pidList">
+                <source>List Page</source>
+                <target>Listenseite</target>
+            </trans-unit>
+
+            <trans-unit id="flexform.settings.limit">
+                <source>Max. Events</source>
+                <target>Max. Veranstaltungen</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

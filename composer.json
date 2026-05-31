@@ -1,0 +1,32 @@
+{
+    "name": "pagea-dev/rubin-events",
+    "description": "Rubin Event Manager - A simple Event Management Extension for TYPO3",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Lukas Doerr",
+            "email": "office@pagea.dev"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^14"
+    },
+    "autoload": {
+        "psr-4": {
+            "PageaDev\\RubinEvents\\": "Classes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "rubin_events"
+        }
+    }
+}

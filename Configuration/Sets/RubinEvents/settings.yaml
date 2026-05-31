@@ -1,0 +1,11 @@
+rubinevents.useTinyslider: 1
+
+plugin.tx_rubinevents_rubinevents:
+  view:
+    templateRootPath: 'EXT:rubin_events/Resources/Private/Templates/'
+    partialRootPath: 'EXT:rubin_events/Resources/Private/Partials/'
+    layoutRootPath: 'EXT:rubin_events/Resources/Private/Layouts/'
+  persistence:
+    storagePid: 0
+  layout:
+    useTinyslider: 1

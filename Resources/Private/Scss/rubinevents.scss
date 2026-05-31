@@ -1,0 +1,255 @@
+$icomoon-font-path: '../Icons/rubinicons';
+
+$defaultBorderRadius: 0px;
+
+$coPrimary:           #3a6a52;
+
+$coSecondary:         #1f4a5e;
+
+$coNeutral:           #6c6e6a;
+
+$coBackroundPrimary:  #f0f1ea;
+
+$coBlack:             #161a1c;
+$coWhite:             #fbfaf5;
+
+
+
+
+
+
+@import "rubinicons.scss";
+
+
+
+
+.rubin-events {
+    
+
+    .view-list {
+
+
+
+
+
+
+        //Tiny Slider Stuff:
+
+        .tns-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+
+            button {
+                width: 50px;
+                height: 50px;
+                border-radius: $defaultBorderRadius;
+                color: white;
+                background: $coPrimary;
+                border: 1px solid $coPrimary;
+                transition: all .2s ease-in-out;
+                font-size: 24px;
+
+                &:hover {
+                    background: lighten($coPrimary, 10%);
+                }
+            }
+        }
+
+        .multislider {
+            display: flex;
+            align-items: stretch;
+
+            .item {
+                flex-shrink: 0;
+
+                .event-inner {
+                    height: 100%;
+                    background: white;
+                    padding: 24px;
+                    color: $coBlack;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    align-items: flex-start;
+
+                    .text-area {
+                        width: 100%;
+                        margin-bottom: 24px;
+
+                        .datetimetitle {
+                            margin-bottom: 24px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: start;
+                            align-items: center;
+
+                            .date {
+                                background: $coPrimary;
+                                color: $coWhite;
+                                padding: 8px;
+                                width: 100%;
+                                margin-bottom: 24px;
+
+                                @media (min-width: 1440px) {
+                                    margin-bottom: 0;
+                                    width: 90px;
+                                }
+
+                                .daymonth {
+                                    width: 100%;
+                                    text-align: center;
+                                    font-size: 18px;
+                                    margin: 0;
+                                }
+
+                                .year {
+                                    width: 100%;
+                                    text-align: center;
+                                    font-size: 24px;
+                                    margin: 0;
+                                }
+                            }
+
+                            .title {
+                                font-size: 22px;
+                                color: $coPrimary;
+                                margin-bottom: 0;
+                                width: 100%;
+                                text-align: center;
+
+                                @media (min-width: 576px) {
+                                    text-align: start;
+                                }
+
+                                @media (min-width: 1440px) {
+                                    width: calc(100% - 102px);
+                                    margin-left: 12px;
+                                }
+                            }
+                        }
+
+                        .icontext {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: start;
+                            align-items: center;
+                            margin-bottom: 12px;
+
+                            .ico {
+                                width: 32px;
+                                height: 32px;
+                                font-size: 24px;
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: center;
+                                align-items: center;
+                                
+                                i {
+                                    color: $coPrimary;
+                                }
+                            }
+
+                            .text {
+                                width: calc(100% - 62px);
+                                color: $coNeutral;
+                                margin-left: 12px;
+                            }
+                        }
+
+                        .teaser {
+                            color: $coNeutral;
+                            text-align: center;
+                            @media (min-width: 576px) {
+                                text-align: start;
+                            }
+                        }
+                    }
+
+                    .readmore {
+                        margin-top: auto;
+                        width: 100%;
+
+                        .btn {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .list-button {
+            text-align: center;
+            .btn {
+                margin: 0;
+            }
+            
+            margin-top: 24px;
+        }
+
+
+        .bs-table-wrapper {
+            .row {
+
+                &.head-row {
+                    strong {
+                        color: $coPrimary;
+                        font-size: 20px;
+                    }
+                }
+
+                &.spacer {
+                    .col-12 {
+                        .line {
+                            margin-bottom: 20px;
+                            padding-bottom: 16px;  
+                            border-bottom: 1px solid lighten($coPrimary, 50%);
+                        }
+                    }
+                }
+
+                &.event-single {
+                    margin-bottom: 12px;
+                    color: $coNeutral;
+
+                    .item {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: start;
+                        align-items: center;
+                    }
+
+                    .btn {
+                        width: 50px;
+                        height: 50px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 5px;
+                        margin: 0;
+                        margin-right: 0;
+                        margin-left: auto;
+
+                        &:after {
+                            display: none !important;
+                            content: "";
+                        }
+
+                        i {
+                            color: white !important;
+                        }
+
+                        
+                    }
+
+                    &:nth-child(even) {
+                        color: darken($coNeutral, 20%);
+                    }
+                }
+            }
+        }
+    }
+}

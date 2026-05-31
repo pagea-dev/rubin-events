@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-05-24T00:00:00Z" product-name="rubin_events">
+        <header/>
+        <body>
+            <!-- Full month names (format: F) -->
+            <trans-unit id="month.1"><source>January</source><target>Januar</target></trans-unit>
+            <trans-unit id="month.2"><source>February</source><target>Februar</target></trans-unit>
+            <trans-unit id="month.3"><source>March</source><target>März</target></trans-unit>
+            <trans-unit id="month.4"><source>April</source><target>April</target></trans-unit>
+            <trans-unit id="month.5"><source>May</source><target>Mai</target></trans-unit>
+            <trans-unit id="month.6"><source>June</source><target>Juni</target></trans-unit>
+            <trans-unit id="month.7"><source>July</source><target>Juli</target></trans-unit>
+            <trans-unit id="month.8"><source>August</source><target>August</target></trans-unit>
+            <trans-unit id="month.9"><source>September</source><target>September</target></trans-unit>
+            <trans-unit id="month.10"><source>October</source><target>Oktober</target></trans-unit>
+            <trans-unit id="month.11"><source>November</source><target>November</target></trans-unit>
+            <trans-unit id="month.12"><source>December</source><target>Dezember</target></trans-unit>
+
+            <!-- Abbreviated month names (format: M) -->
+            <trans-unit id="month.abbr.1"><source>Jan</source><target>Jan.</target></trans-unit>
+            <trans-unit id="month.abbr.2"><source>Feb</source><target>Feb.</target></trans-unit>
+            <trans-unit id="month.abbr.3"><source>Mar</source><target>März</target></trans-unit>
+            <trans-unit id="month.abbr.4"><source>Apr</source><target>Apr.</target></trans-unit>
+            <trans-unit id="month.abbr.5"><source>May</source><target>Mai</target></trans-unit>
+            <trans-unit id="month.abbr.6"><source>Jun</source><target>Juni</target></trans-unit>
+            <trans-unit id="month.abbr.7"><source>Jul</source><target>Juli</target></trans-unit>
+            <trans-unit id="month.abbr.8"><source>Aug</source><target>Aug.</target></trans-unit>
+            <trans-unit id="month.abbr.9"><source>Sep</source><target>Sep.</target></trans-unit>
+            <trans-unit id="month.abbr.10"><source>Oct</source><target>Okt.</target></trans-unit>
+            <trans-unit id="month.abbr.11"><source>Nov</source><target>Nov.</target></trans-unit>
+            <trans-unit id="month.abbr.12"><source>Dec</source><target>Dez.</target></trans-unit>
+
+            <!-- Full weekday names (format: l), ISO: 1=Mon, 7=Sun -->
+            <trans-unit id="weekday.1"><source>Monday</source><target>Montag</target></trans-unit>
+            <trans-unit id="weekday.2"><source>Tuesday</source><target>Dienstag</target></trans-unit>
+            <trans-unit id="weekday.3"><source>Wednesday</source><target>Mittwoch</target></trans-unit>
+            <trans-unit id="weekday.4"><source>Thursday</source><target>Donnerstag</target></trans-unit>
+            <trans-unit id="weekday.5"><source>Friday</source><target>Freitag</target></trans-unit>
+            <trans-unit id="weekday.6"><source>Saturday</source><target>Samstag</target></trans-unit>
+            <trans-unit id="weekday.7"><source>Sunday</source><target>Sonntag</target></trans-unit>
+
+            <!-- TinySlider buttons -->
+            <trans-unit id="tinyslider.readmore"><source>More info</source><target>Mehr Infos</target></trans-unit>
+            <trans-unit id="tinyslider.allEvents"><source>All events</source><target>Alle Termine</target></trans-unit>
+
+            <!-- Empty state messages -->
+            <trans-unit id="list.empty"><source>No upcoming events found.</source><target>Keine anstehenden Termine gefunden.</target></trans-unit>
+            <trans-unit id="archive.empty"><source>No past events found.</source><target>Keine vergangenen Termine gefunden.</target></trans-unit>
+
+            <!-- Show view -->
+            <trans-unit id="show.back"><source>Back to list</source><target>Zurück zur Übersicht</target></trans-unit>
+            <trans-unit id="show.contacts"><source>Contacts</source><target>Ansprechpartner</target></trans-unit>
+            <trans-unit id="show.map.link"><source>Show on map</source><target>Auf Karte anzeigen</target></trans-unit>
+            <trans-unit id="show.notfound"><source>Event not found.</source><target>Termin nicht gefunden.</target></trans-unit>
+
+            <!-- BsList column headers -->
+            <trans-unit id="bslist.col.date"><source>Date</source><target>Datum</target></trans-unit>
+            <trans-unit id="bslist.col.title"><source>Title</source><target>Termin</target></trans-unit>
+            <trans-unit id="bslist.col.description"><source>Description</source><target>Beschreibung</target></trans-unit>
+            <trans-unit id="bslist.col.location"><source>Location</source><target>Standort</target></trans-unit>
+            <trans-unit id="bslist.time.suffix"><source>o'clock</source><target>Uhr</target></trans-unit>
+
+            <!-- Abbreviated weekday names (format: D) -->
+            <trans-unit id="weekday.abbr.1"><source>Mon</source><target>Mo</target></trans-unit>
+            <trans-unit id="weekday.abbr.2"><source>Tue</source><target>Di</target></trans-unit>
+            <trans-unit id="weekday.abbr.3"><source>Wed</source><target>Mi</target></trans-unit>
+            <trans-unit id="weekday.abbr.4"><source>Thu</source><target>Do</target></trans-unit>
+            <trans-unit id="weekday.abbr.5"><source>Fri</source><target>Fr</target></trans-unit>
+            <trans-unit id="weekday.abbr.6"><source>Sat</source><target>Sa</target></trans-unit>
+            <trans-unit id="weekday.abbr.7"><source>Sun</source><target>So</target></trans-unit>
+        </body>
+    </file>
+</xliff>

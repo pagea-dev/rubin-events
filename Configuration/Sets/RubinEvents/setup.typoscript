@@ -1,0 +1,25 @@
+@import './TypoScript/'
+
+
+plugin.tx_rubinevents_rubinevents {
+    view {
+        templateRootPaths {
+            0 = {$rubinevents.templateRootPath}
+            10 = {$rubinevents.templateRootPathOverride}
+        }
+        partialRootPaths {
+            0 = {$rubinevents.partialRootPath}
+            10 = {$rubinevents.partialRootPathOverride}
+        }
+        layoutRootPaths {
+            0 = {$rubinevents.layoutRootPath}
+            10 = {$rubinevents.layoutRootPathOverride}
+        }
+    }
+    settings {
+        storagePid = {$rubinevents.storagePid}
+    }
+    persistence {
+        storagePid = {$rubinevents.storagePid}
+    }
+}

@@ -1,0 +1,27 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  PageaDev\RubinEvents\:
+    resource: '../Classes/*'
+    exclude:
+      - '../Classes/Domain/Model/*'
+
+  PageaDev\RubinEvents\Widget\CreateEventButtonProvider: ~
+
+  dashboard.widget.rubinEventsEventList:
+    class: 'PageaDev\RubinEvents\Widget\EventListWidget'
+    arguments:
+      $buttonProvider: '@PageaDev\RubinEvents\Widget\CreateEventButtonProvider'
+      $options: []
+    tags:
+      - name: dashboard.widget
+        identifier: 'rubinEvents.eventList'
+        groupNames: 'general'
+        title: 'LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:widget.eventList.title'
+        description: 'LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:widget.eventList.description'
+        iconIdentifier: 'content-widget-list'
+        height: 'large'
+        width: 'large'

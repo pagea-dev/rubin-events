@@ -1,0 +1,111 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:r="http://typo3.org/ns/PageaDev/RubinEvents/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <f:layout name="Default" />
+
+    <f:section name="Content">
+
+    <f:be.security.ifAuthenticated>
+        <f:debug inline="0">{_all}</f:debug>
+    </f:be.security.ifAuthenticated>
+
+        <div class="view-show rubin-event-show">
+
+            <f:if condition="{event}">
+                <f:then>
+
+                    <f:if condition="{settings.pidList}">
+                        <div class="mb-4">
+                            <f:link.action action="list" pageUid="{settings.pidList}" class="btn btn-outline-secondary btn-sm">
+                                <i class="rubinicon-arrow_back"></i>
+                                <f:translate key="show.back" extensionName="RubinEvents" />
+                            </f:link.action>
+                        </div>
+                    </f:if>
+
+                    <h1 class="event-title mb-3">{event.title}</h1>
+
+                    <div class="event-meta d-flex flex-wrap gap-4 mb-4">
+
+                        <div class="icontext">
+                            <div class="ico"><i class="rubinicon-calendar_today"></i></div>
+                            <div class="text">
+                                <r:format.localizedDate date="{event.eventStart}" format="d. M Y, H:i" />
+                                <f:translate key="bslist.time.suffix" extensionName="RubinEvents" />
+                                <f:if condition="{event.eventEnd}">
+                                    &ndash;
+                                    <r:format.localizedDate date="{event.eventEnd}" format="d. M Y, H:i" />
+                                    <f:translate key="bslist.time.suffix" extensionName="RubinEvents" />
+                                </f:if>
+                            </div>
+                        </div>
+
+                        <f:if condition="{event.location}">
+                            <div class="icontext">
+                                <div class="ico"><i class="rubinicon-location_on"></i></div>
+                                <div class="text">{event.location}</div>
+                            </div>
+                        </f:if>
+
+                    </div>
+
+                    <f:if condition="{event.teaser}">
+                        <p class="event-teaser lead mb-4">{event.teaser}</p>
+                    </f:if>
+
+                    <f:if condition="{event.description}">
+                        <div class="event-description mb-5">
+                            <f:format.nl2br>{event.description}</f:format.nl2br>
+                        </div>
+                    </f:if>
+
+                    <div class="row g-4">
+
+                        <f:if condition="{event.contacts}">
+                            <div class="col-12 col-md-6">
+                                <div class="event-contacts">
+                                    <h5 class="mb-3">
+                                        <f:translate key="show.contacts" extensionName="RubinEvents" />
+                                    </h5>
+                                    <f:for each="{event.contacts}" as="contact">
+                                        <div class="contact mb-2">
+                                            <div class="fw-semibold">{contact.firstname} {contact.lastname}</div>
+                                            <f:if condition="{contact.email}">
+                                                <a href="mailto:{contact.email}" class="text-break">{contact.email}</a>
+                                            </f:if>
+                                        </div>
+                                    </f:for>
+                                </div>
+                            </div>
+                        </f:if>
+
+                        <f:if condition="{event.mapLocation}">
+                            <div class="col-12 col-md-6">
+                                <div class="event-map">
+                                    <a href="https://www.openstreetmap.org/?mlat={event.lat}&amp;mlon={event.lon}#map=14/{event.lat}/{event.lon}"
+                                       class="btn btn-outline-secondary"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+                                        <i class="rubinicon-location_on"></i>
+                                        <f:translate key="show.map.link" extensionName="RubinEvents" />
+                                    </a>
+                                </div>
+                            </div>
+                        </f:if>
+
+                    </div>
+
+                </f:then>
+                <f:else>
+                    <p class="text-muted">
+                        <f:translate key="show.notfound" extensionName="RubinEvents" />
+                    </p>
+                </f:else>
+            </f:if>
+
+        </div>
+
+    </f:section>
+
+</html>

@@ -1,0 +1,37 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:r="http://typo3.org/ns/PageaDev/RubinEvents/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <!--Event/List Partial-->
+
+    <table class="table rubin-events-table">
+        <thead>
+            <tr>
+                <th><f:translate key="bslist.col.date" extensionName="RubinEvents" /></th>
+                <th><f:translate key="bslist.col.title" extensionName="RubinEvents" /></th>
+                <th class="d-none d-md-table-cell"><f:translate key="bslist.col.description" extensionName="RubinEvents" /></th>
+                <th class="d-none d-lg-table-cell"><f:translate key="bslist.col.location" extensionName="RubinEvents" /></th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{events}" as="event">
+                <tr>
+                    <td>
+                        <r:format.localizedDate date="{event.eventStart}" format="d. M Y" /><br>
+                        <r:format.localizedDate date="{event.eventStart}" format="H:i" /> <f:translate key="bslist.time.suffix" extensionName="RubinEvents" />
+                    </td>
+                    <td>
+                        <f:format.crop maxCharacters="45" append="..." respectWordBoundaries="1" respectHtml="1">{event.title}</f:format.crop>
+                    </td>
+                    <td class="d-none d-md-table-cell">
+                        <f:format.crop maxCharacters="120" append="..." respectWordBoundaries="1" respectHtml="1">{event.teaser}</f:format.crop>
+                    </td>
+                    <td class="d-none d-lg-table-cell">
+                        {event.location}
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+
+</html>

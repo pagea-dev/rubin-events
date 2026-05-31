@@ -1,0 +1,39 @@
+mod.wizards.newContentElement.wizardItems {
+    plugins {
+        elements {
+            rubinevents_eventlist >
+            rubinevents_eventshow >
+            rubinevents_eventarchive >
+        }
+    }
+    rubinEvents {
+        header = Rubin Events
+        elements {
+            rubinevents_eventlist {
+                iconIdentifier = ext-rubin-events-plugin
+                title = Events: List
+                description = Shows a list of upcoming events.
+                tt_content_defValues {
+                    CType = rubinevents_eventlist
+                }
+            }
+            rubinevents_eventshow {
+                iconIdentifier = ext-rubin-events-plugin
+                title = Events: Detail
+                description = Shows the detail view of a single event.
+                tt_content_defValues {
+                    CType = rubinevents_eventshow
+                }
+            }
+            rubinevents_eventarchive {
+                iconIdentifier = ext-rubin-events-plugin
+                title = Events: Archive
+                description = Shows archived events.
+                tt_content_defValues {
+                    CType = rubinevents_eventarchive
+                }
+            }
+        }
+        show = *
+    }
+}

@@ -1,0 +1,36 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:r="http://typo3.org/ns/PageaDev/RubinEvents/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <f:layout name="Default" />
+
+    <f:section name="Content">
+
+        <div class="view-list style-{settings.listStyle}">
+
+            <f:if condition="{events}">
+                <f:then>
+                    <f:switch expression="{settings.listStyle}">
+                        <f:case value="0">
+                            <f:render partial="Event/TinySlider" arguments="{events: events, settings: settings}" />
+                        </f:case>
+                        <f:case value="2">
+                            <f:render partial="Event/BsList" arguments="{events: events, settings: settings}" />
+                        </f:case>
+                        <f:defaultCase>
+                            <f:render partial="Event/List" arguments="{events: events, settings: settings}" />
+                        </f:defaultCase>
+                    </f:switch>
+                </f:then>
+                <f:else>
+                    <f:translate key="LLL:EXT:rubin_events/Resources/Private/Language/locallang.xlf:list.empty" />
+                </f:else>
+            </f:if>
+
+            
+
+        </div>
+
+    </f:section>
+
+</html>

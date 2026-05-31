@@ -1,0 +1,67 @@
+categories:
+  RubinEvents:
+    label: 'Rubin Events'
+  RubinEvents.templates:
+    label: 'Templates'
+    parent: RubinEvents
+  RubinEvents.persistence:
+    label: 'Persistence'
+    parent: RubinEvents
+  RubinEvents.layout:
+    label: 'Layout'
+    parent: RubinEvents
+
+settings:
+  rubinevents.templateRootPath:
+    label: 'Path to template root'
+    description: 'Path to the template root directory'
+    category: RubinEvents.templates
+    type: string
+    default: 'EXT:rubin_events/Resources/Private/Templates/'
+
+  rubinevents.partialRootPath:
+    label: 'Path to template partials'
+    category: RubinEvents.templates
+    type: string
+    default: 'EXT:rubin_events/Resources/Private/Partials/'
+
+  rubinevents.layoutRootPath:
+    label: 'Path to template layouts'
+    category: RubinEvents.templates
+    type: string
+    default: 'EXT:rubin_events/Resources/Private/Layouts/'
+
+  rubinevents.templateRootPathOverride:
+    label: 'Template override path'
+    description: 'Optional path to override extension templates (takes priority over default)'
+    category: RubinEvents.templates
+    type: string
+    default: ''
+
+  rubinevents.partialRootPathOverride:
+    label: 'Partials override path'
+    description: 'Optional path to override extension partials (takes priority over default)'
+    category: RubinEvents.templates
+    type: string
+    default: ''
+
+  rubinevents.layoutRootPathOverride:
+    label: 'Layouts override path'
+    description: 'Optional path to override extension layouts (takes priority over default)'
+    category: RubinEvents.templates
+    type: string
+    default: ''
+
+  rubinevents.storagePid:
+    label: 'Storage PID'
+    description: 'Page UID where event records are stored'
+    category: RubinEvents.persistence
+    type: int
+    default: 0
+
+  rubinevents.useTinyslider:
+    label: 'Use TinySlider'
+    description: 'Load the TinySlider CSS and JS assets'
+    category: RubinEvents.layout
+    type: bool
+    default: false
