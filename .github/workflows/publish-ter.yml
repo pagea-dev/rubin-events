@@ -1,0 +1,35 @@
+name: Publish to TER
+
+# Trigger on every pushed semver tag (e.g. 1.0.2)
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  ter-release:
+    name: Publish ${{ github.ref_name }} to TER
+    runs-on: ubuntu-latest
+    env:
+      TYPO3_EXTENSION_KEY: rubin_events
+      TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: intl, mbstring, zip
+          tools: composer:v2
+
+      - name: Install tailor
+        run: composer global require typo3/tailor
+
+      - name: Publish to TER
+        # Use the pushed tag as the version number
+        run: |
+          export PATH="$HOME/.composer/vendor/bin:$PATH"
+          tailor set-version "${{ github.ref_name }}"
+          tailor ter:publish --comment "Released ${{ github.ref_name }}" "${{ github.ref_name }}"
