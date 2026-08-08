@@ -6,10 +6,6 @@
 
     <f:section name="Content">
 
-    <f:be.security.ifAuthenticated>
-        <f:debug inline="0">{_all}</f:debug>
-    </f:be.security.ifAuthenticated>
-
         <div class="view-show rubin-event-show">
 
             <f:if condition="{event}">
@@ -82,15 +78,7 @@
 
                         <f:if condition="{event.mapLocation}">
                             <div class="col-12 col-md-6">
-                                <div class="event-map">
-                                    <a href="https://www.openstreetmap.org/?mlat={event.lat}&amp;mlon={event.lon}#map=14/{event.lat}/{event.lon}"
-                                       class="btn btn-outline-secondary"
-                                       target="_blank"
-                                       rel="noopener noreferrer">
-                                        <i class="rubinicon-location_on"></i>
-                                        <f:translate key="show.map.link" extensionName="RubinEvents" />
-                                    </a>
-                                </div>
+                                <f:render partial="Event/Map" arguments="{event: event, settings: settings}" />
                             </div>
                         </f:if>
 

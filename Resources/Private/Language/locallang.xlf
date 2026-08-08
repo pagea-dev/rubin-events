@@ -52,6 +52,8 @@
             <trans-unit id="show.back"><source>Back to list</source></trans-unit>
             <trans-unit id="show.contacts"><source>Contacts</source></trans-unit>
             <trans-unit id="show.map.link"><source>Show on map</source></trans-unit>
+            <trans-unit id="show.map.osm"><source>Open in OpenStreetMap</source></trans-unit>
+            <trans-unit id="show.map.google"><source>Open in Google Maps</source></trans-unit>
             <trans-unit id="show.notfound"><source>Event not found.</source></trans-unit>
 
             <!-- BsList column headers -->

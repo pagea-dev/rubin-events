@@ -1,7 +1,7 @@
-@import './TypoScript/'
+@import 'EXT:rubin_events/Configuration/Sets/RubinEvents/TypoScript/'
 
 
-plugin.tx_rubinevents_rubinevents {
+plugin.tx_rubinevents {
     view {
         templateRootPaths {
             0 = {$rubinevents.templateRootPath}

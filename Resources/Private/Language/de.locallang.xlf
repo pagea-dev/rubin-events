@@ -52,6 +52,8 @@
             <trans-unit id="show.back"><source>Back to list</source><target>Zurück zur Übersicht</target></trans-unit>
             <trans-unit id="show.contacts"><source>Contacts</source><target>Ansprechpartner</target></trans-unit>
             <trans-unit id="show.map.link"><source>Show on map</source><target>Auf Karte anzeigen</target></trans-unit>
+            <trans-unit id="show.map.osm"><source>Open in OpenStreetMap</source><target>In OpenStreetMap öffnen</target></trans-unit>
+            <trans-unit id="show.map.google"><source>Open in Google Maps</source><target>In Google Maps öffnen</target></trans-unit>
             <trans-unit id="show.notfound"><source>Event not found.</source><target>Termin nicht gefunden.</target></trans-unit>
 
             <!-- BsList column headers -->

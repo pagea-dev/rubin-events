@@ -24,13 +24,13 @@ return [
     'types' => [
         [
             'showitem' => '
-                --div--;core.form.tabs:general,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
                     event_start, event_end, title, teaser, description, location, map_location, creator, contacts,
-                --div--;core.form.tabs:language,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
                     --palette--;;language,
-                --div--;core.form.tabs:access,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                     hidden,--palette--;;access,
-                --div--;core.form.tabs:extended,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
             ',
         ],
     ],

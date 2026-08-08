@@ -253,3 +253,27 @@ $coWhite:             #fbfaf5;
         }
     }
 }
+
+.rubin-events {
+
+    .view-show {
+
+        .event-map {
+
+            .map-canvas {
+                // Leaflet needs an explicit height, it does not bring one itself
+                height: 350px;
+                width: 100%;
+                border-radius: $defaultBorderRadius;
+                margin-bottom: 16px;
+                z-index: 0;
+            }
+
+            .map-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+        }
+    }
+}

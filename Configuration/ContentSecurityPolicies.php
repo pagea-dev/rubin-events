@@ -12,8 +12,17 @@ use TYPO3\CMS\Core\Type\Map;
 
 $map = new Map();
 
-// extend backend CSP to allow OSM tile images
+// extend backend CSP to allow OSM tile images (map picker in the record form)
 $map[Scope::backend()] = new MutationCollection(
+    new Mutation(
+        MutationMode::Extend,
+        Directive::ImgSrc,
+        new UriValue('https://*.tile.openstreetmap.org'),
+    ),
+);
+
+// same for the frontend, where the detail view renders a Leaflet map
+$map[Scope::frontend()] = new MutationCollection(
     new Mutation(
         MutationMode::Extend,
         Directive::ImgSrc,

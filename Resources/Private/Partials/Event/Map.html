@@ -1,0 +1,46 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:r="http://typo3.org/ns/PageaDev/RubinEvents/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <f:if condition="{event.mapLocation}">
+
+        <f:asset.css identifier="rubinevents-leaflet" href="EXT:rubin_events/Resources/Public/JavaScript/Lib/Leaflet/leaflet.css" />
+        <f:asset.script identifier="rubinevents-leaflet" src="EXT:rubin_events/Resources/Public/JavaScript/Lib/Leaflet/leaflet.js" />
+        <f:asset.script identifier="rubinevents-eventmap" src="EXT:rubin_events/Resources/Public/JavaScript/EventMap.js" />
+
+        <!-- Leaflet renders nothing without a height. This is the bare minimum so the map also
+             works without the extension SCSS; rubinevents.scss overrides it via higher specificity. -->
+        <f:asset.css identifier="rubinevents-map-fallback">.rubin-events .map-canvas { height: 350px; }</f:asset.css>
+
+        <div class="event-map">
+
+            <div class="map-canvas"
+                 data-rubin-event-map
+                 data-lat="{event.lat}"
+                 data-lon="{event.lon}"
+                 data-zoom="14"
+                 data-label="{event.title}"></div>
+
+            <div class="map-links">
+                <a href="https://www.openstreetmap.org/?mlat={event.lat}&amp;mlon={event.lon}#map=16/{event.lat}/{event.lon}"
+                   class="btn btn-outline-secondary"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="rubinicon-location_on"></i>
+                    <f:translate key="show.map.osm" extensionName="RubinEvents" />
+                </a>
+
+                <a href="https://www.google.com/maps/search/?api=1&amp;query={event.lat},{event.lon}"
+                   class="btn btn-outline-secondary"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="rubinicon-location_on"></i>
+                    <f:translate key="show.map.google" extensionName="RubinEvents" />
+                </a>
+            </div>
+
+        </div>
+
+    </f:if>
+
+</html>

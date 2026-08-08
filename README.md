@@ -1,6 +1,6 @@
 # Rubin Events — TYPO3 Event Management Extension
 
-A simple event management extension for TYPO3 v14. Create, display and archive club events with optional map location (OpenStreetMap).
+A simple event management extension for TYPO3 v13 and v14. Create, display and archive club events with optional map location (OpenStreetMap).
 
 ---
 
@@ -8,7 +8,7 @@ A simple event management extension for TYPO3 v14. Create, display and archive c
 
 | Component | Version |
 |---|---|
-| TYPO3 | ^14.0 |
+| TYPO3 | `^13.4 \|\| ^14.0` |
 | PHP | ^8.1 |
 | fe_users | Included with TYPO3 core |
 
@@ -193,13 +193,26 @@ Empty values (default) mean the extension's own templates are used.
 
 | File | Description |
 |---|---|
-| `Templates/Event/List.fluid.html` | List view (dispatches to list style partial) |
-| `Templates/Event/Show.fluid.html` | Detail view |
-| `Templates/Event/Archive.fluid.html` | Archive view |
-| `Partials/Event/List.fluid.html` | Default tile partial |
-| `Partials/Event/BsList.fluid.html` | Bootstrap list partial |
-| `Partials/Event/TinySlider.fluid.html` | TinySlider partial |
-| `Partials/Event/Show.fluid.html` | Detail partial |
+| `Templates/Event/List.html` | List view (dispatches to list style partial) |
+| `Templates/Event/Show.html` | Detail view |
+| `Templates/Event/Archive.html` | Archive view |
+| `Partials/Event/List.html` | Default tile partial |
+| `Partials/Event/BsList.html` | Bootstrap list partial |
+| `Partials/Event/TinySlider.html` | TinySlider partial |
+| `Partials/Event/Show.html` | Detail partial |
+| `Partials/Event/Map.html` | Leaflet map incl. external map links |
+
+---
+
+## Map in the Detail View
+
+When an event has coordinates set (see *Map Picker*), the detail view renders `Partials/Event/Map.html`: an interactive Leaflet map centered on the event, followed by two buttons that open the location in **OpenStreetMap** and in **Google Maps**.
+
+Leaflet's CSS and JS are pulled in by the partial itself via `f:asset.css` / `f:asset.script`, so they are only loaded on pages that actually show a map — no TypoScript setup required. Leaflet is bundled locally in `Resources/Public/JavaScript/Lib/Leaflet/`; only the map tiles are fetched from `tile.openstreetmap.org`, which `Configuration/ContentSecurityPolicies.php` allows for both backend and frontend scope.
+
+Scroll wheel zoom is disabled until the map has focus, so scrolling past the map does not trap the page.
+
+The map container needs an explicit height — it is styled in `Resources/Private/Scss/rubinevents.scss` (`.map-canvas`, default `350px`). If you do not load the extension's SCSS, set a height yourself, otherwise the map stays invisible.
 
 ---
 
