@@ -12,10 +12,10 @@
                 <f:then>
                     <f:switch expression="{settings.listStyle}">
                         <f:case value="2">
-                            <f:render partial="Event/BsList" arguments="{events: events, settings: settings}" />
+                            <f:render partial="Event/BsList" arguments="{events: events, settings: settings, listPid: listPid}" />
                         </f:case>
                         <f:defaultCase>
-                            <f:render partial="Event/List" arguments="{events: events, settings: settings}" />
+                            <f:render partial="Event/List" arguments="{events: events, settings: settings, listPid: listPid}" />
                         </f:defaultCase>
                     </f:switch>
                 </f:then>

@@ -11,9 +11,9 @@
             <f:if condition="{event}">
                 <f:then>
 
-                    <f:if condition="{settings.pidList}">
+                    <f:if condition="{listPid}">
                         <div class="mb-4">
-                            <f:link.action action="list" pageUid="{settings.pidList}" class="btn btn-outline-secondary btn-sm">
+                            <f:link.action action="list" pageUid="{listPid}" class="btn btn-outline-secondary btn-sm">
                                 <i class="rubinicon-arrow_back"></i>
                                 <f:translate key="show.back" extensionName="RubinEvents" />
                             </f:link.action>

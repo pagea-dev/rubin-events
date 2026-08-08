@@ -82,11 +82,20 @@ Displays upcoming events.
 | Field | Description |
 |---|---|
 | Storage PID | Folder page from which events are loaded |
-| Detail page (pidList) | Target page for the "more" link / detail view |
+| List page (pidList) | Where the detail view returns to — see below |
 | List style | Rendering variant (default list, Bootstrap list, TinySlider) |
 | "More" button behavior | Inline display or redirect to detail page |
 | Detail page (pidShow) | Only shown when "more" button is set to redirect |
 | Limit | Maximum number of events shown (1–100, default: 10) |
+
+**List page:** every detail link this plugin renders carries the list page along
+(`…&tx_rubinevents_eventshow[pidList]=12`), and the detail view uses it for its back button. That way
+one detail page can serve several lists sitting on different pages, each returning to its own list.
+
+Leave the field empty and the plugin hands over **the page it is placed on**, so the visitor returns
+to where they came from without any configuration. Set it explicitly only when the back button should
+lead somewhere else — note that the TinySlider variant also renders its "all events" button from this
+field, and only when it is set.
 
 **List style values:**
 
@@ -105,9 +114,9 @@ Displays a single event in detail.
 | Field | Description |
 |---|---|
 | Storage PID | Folder page from which events are loaded |
-| Back page (pidList) | Target page for the back button |
+| List page (pidList) | Fallback target for the back button, used when the linking plugin does not pass one |
 
-If no event is found, the controller automatically redirects to `pidList`.
+If no event is found, the controller automatically redirects to the back page.
 
 ### Event Archive (`archive`)
 

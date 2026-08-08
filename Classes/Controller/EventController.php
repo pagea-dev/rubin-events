@@ -36,7 +36,23 @@ class EventController extends ActionController
 
         $limit = (int)($this->settings['limit'] ?? 0);
         $this->view->assign('events', $this->eventRepository->findAllSorted($limit));
+        $this->view->assign('listPid', $this->resolveListPid());
         return $this->htmlResponse();
+    }
+
+    /**
+     * List page handed over to the detail view for its back button. Falls back to the page
+     * this plugin is rendered on, so the detail view returns to wherever the link was clicked.
+     */
+    private function resolveListPid(): int
+    {
+        $listPid = (int)($this->settings['pidList'] ?? 0);
+
+        if ($listPid > 0) {
+            return $listPid;
+        }
+
+        return (int)($this->request->getAttribute('frontend.page.information')?->getId() ?? 0);
     }
 
 
@@ -50,7 +66,7 @@ class EventController extends ActionController
         }
     }
 
-    public function showAction(?Event $event = null): ResponseInterface
+    public function showAction(?Event $event = null, int $pidList = 0): ResponseInterface
     {
 
         $storagePid = (int)($this->settings['storagePid'] ?? 0);
@@ -61,17 +77,18 @@ class EventController extends ActionController
             $this->eventRepository->setDefaultQuerySettings($querySettings);
         }
 
+        // The linking list plugin hands over the page to return to, so one detail page can
+        // serve several lists. Without it the plugin's own list page is used.
+        $listPid = $pidList > 0 ? $pidList : (int)($this->settings['pidList'] ?? 0);
+
         if ($event === null) {
-            $listPid = (int)($this->settings['pidList'] ?? 1);
-
             return $this->redirectToUri(
-                $this->uriBuilder->reset()->setTargetPageUid($listPid)->build()
+                $this->uriBuilder->reset()->setTargetPageUid($listPid > 0 ? $listPid : 1)->build()
             );
-
-            
         }
 
         $this->view->assign('event', $event);
+        $this->view->assign('listPid', $listPid);
         return $this->htmlResponse();
     }
 
@@ -87,6 +104,7 @@ class EventController extends ActionController
 
         $limit = (int)($this->settings['limit'] ?? 0);
         $this->view->assign('events', $this->eventRepository->findAllPast($limit));
+        $this->view->assign('listPid', $this->resolveListPid());
         return $this->htmlResponse();
     }
 }

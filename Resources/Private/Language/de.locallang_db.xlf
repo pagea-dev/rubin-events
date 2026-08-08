@@ -210,6 +210,11 @@
                 <target>Listenseite</target>
             </trans-unit>
 
+            <trans-unit id="flexform.settings.pidList.description">
+                <source>Passed along with every detail link, so the back button on the detail view returns here. Leave empty to return to the page this plugin is placed on.</source>
+                <target>Wird an jedem Detail-Link mitgegeben, damit der Zurück-Button der Detailansicht hierher führt. Leer lassen, um auf die Seite zurückzuführen, auf der dieses Plugin steht.</target>
+            </trans-unit>
+
             <trans-unit id="flexform.settings.limit">
                 <source>Max. Events</source>
                 <target>Max. Veranstaltungen</target>

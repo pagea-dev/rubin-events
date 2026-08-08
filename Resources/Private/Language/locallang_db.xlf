@@ -167,6 +167,10 @@
                 <source>List Page</source>
             </trans-unit>
 
+            <trans-unit id="flexform.settings.pidList.description">
+                <source>Passed along with every detail link, so the back button on the detail view returns here. Leave empty to return to the page this plugin is placed on.</source>
+            </trans-unit>
+
             <trans-unit id="flexform.settings.limit">
                 <source>Max. Events</source>
             </trans-unit>

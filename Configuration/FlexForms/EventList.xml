@@ -19,6 +19,7 @@
 
                     <settings.pidList>
                         <label>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.pidList</label>
+                        <description>LLL:EXT:rubin_events/Resources/Private/Language/locallang_db.xlf:flexform.settings.pidList.description</description>
                         <config>
                             <type>group</type>
                             <allowed>pages</allowed>
