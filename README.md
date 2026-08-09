@@ -64,9 +64,13 @@ In the backend under **Admin Tools → Extensions → Rubin Events**, configure 
 | Default Latitude | Map center latitude on first load | `51.5` |
 | Default Longitude | Map center longitude on first load | `9.5` |
 | Storage PID | Default folder PID for new backend records | `14` |
+| Default Column Position | `colPos` the page structure importer places its plugins in | `0` |
 | Load Swiper | Ship the bundled Swiper element with the slider list style | on |
 
-These values are used as fallback by the Map Picker when no coordinates have been saved yet.
+The map values are used as fallback by the Map Picker when no coordinates have been saved yet.
+
+Steps 2 and 3 can be skipped: *Import page structure* in the backend module builds the folder and
+writes the storage PID itself, see [Page structure import](#page-structure-import).
 
 ---
 
@@ -294,9 +298,15 @@ At the top of the module an infobox reports the state of the extension configura
 | Red | No setting is usable |
 
 Checked are `storagePid` (must resolve to an existing page), `defaultZoom` (1–18), `defaultLat`
-(−90…90) and `defaultLon` (−180…180); each invalid one is listed with its current value and what is
-expected. `useSwiper` is left out — a checkbox has no invalid value, and counting it would make the
-red state unreachable.
+(−90…90), `defaultLon` (−180…180) and `defaultColPos` (0 or greater); each invalid one is listed
+with its current value and what is expected. `useSwiper` is left out — a checkbox has no invalid
+value, and counting it would make the red state unreachable.
+
+The same state also reaches the module menu, so a broken configuration is visible without opening
+the module: the entry then reads **Events ⚠** and shows a warning icon, with the hover text naming
+the state. This is done by `Backend\ModuleIndicator`, a listener on `BeforeModuleCreationEvent`. Both
+halves carry the marker because only one of them is ever visible — the icon when the module menu is
+collapsed, the title when it is not.
 
 ### Example import
 
@@ -337,6 +347,57 @@ PHP change.
 
 Because raw INSERTs bypass `DataHandler`, the importer updates the reference index for the records
 it wrote — otherwise the file references would show up as broken in the backend.
+
+### Page structure import
+
+*Import page structure*, next to it in the doc header, is the larger of the two: it builds a working
+event setup instead of only the records.
+
+1. a page **"Rubin Events – Beispielseiten"** below the first configured site root, with a list
+   page, a slider page, a detail page and an **Event data** storage folder underneath,
+2. the plugins on those pages, already pointing at each other — the list links to the detail page,
+   the slider opens the modal, and both carry an **archive** plugin below the list so past events
+   stay reachable from the same page,
+3. `storagePid` in the extension configuration, set to the new storage folder,
+4. the example content from the section above, imported straight into that folder.
+
+So one click produces pages that actually show something. *Import examples* stays what it was, for
+when only the records are wanted.
+
+The pages are created with `nav_hide = 1`. This runs against sites that are already live, and an
+importer has no business putting new entries into someone's main navigation — reach them by the URL
+the flash message points at, or move them in the page tree.
+
+The structure lives in SQL next to the example content, one file per language:
+
+```
+ExampleContent/
+  pagetree.en.sql   English page titles
+  pagetree.de.sql   German page titles
+```
+
+Which one is used depends on the backend language of whoever clicks the button —
+`pagetree.<language code>.sql`, falling back to `pagetree.en.sql`. Another language means another
+file, nothing else.
+
+| Placeholder | Resolved to |
+|---|---|
+| `###PARENT###` | uid of the page the structure is attached to (the site root) |
+| `###PAGE:<key>###` | uid of a page created earlier in the same file |
+| `###COLPOS###` | the `defaultColPos` extension setting |
+
+`###PAGE:<key>###` refers back to a `-- @as <key>` line placed before an `INSERT` into `pages`.
+Statements run in file order, so a key has to exist before it is used, and a statement always ends
+with a semicolon at the end of a line.
+
+What the dump deliberately leaves to the importer: slugs (built from the parent slug and the title,
+made unique), the sorting of the root page (moved behind whatever the site already contains) and the
+reference index. The whole run is wrapped in a transaction — a half-created page tree is worse than
+none.
+
+Clicking again reports that the structure is already there. The root page carries a
+`tx_rubinevents_example` flag for that; a title match would stop working the moment a language is
+added. Delete that page — the subtree goes with it — to import again.
 
 The module is registered through `Configuration/Backend/Modules.php` using the route form
 (`routes` → controller method) rather than Extbase `controllerActions`, and the controller is a plain

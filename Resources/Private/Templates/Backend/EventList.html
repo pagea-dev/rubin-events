@@ -27,7 +27,7 @@
                             </td>
                             <td><code>{setting.key}</code></td>
                             <td>
-                                <f:if condition="{setting.value}">
+                                <f:if condition="{setting.hasValue}">
                                     <f:then>{setting.value}</f:then>
                                     <f:else><em><f:translate key="LLL:EXT:rubin_events/Resources/Private/Language/locallang_mod.xlf:module.config.notSet" /></em></f:else>
                                 </f:if>

@@ -4,6 +4,7 @@
         <header/>
         <body>
             <trans-unit id="mlang_tabs_tab"><source>Events</source></trans-unit>
+            <trans-unit id="mlang_tabs_tab.misconfigured"><source>Events ⚠</source></trans-unit>
             <trans-unit id="mlang_labels_tablabel"><source>Event overview</source></trans-unit>
             <trans-unit id="mlang_labels_tabdescr"><source>Lists all event records, upcoming and past, and links straight into the record editor.</source></trans-unit>
 
@@ -21,10 +22,16 @@
             <trans-unit id="module.action.edit"><source>Edit event</source></trans-unit>
             <trans-unit id="module.button.new"><source>New event</source></trans-unit>
             <trans-unit id="module.button.importExamples"><source>Import examples</source></trans-unit>
+            <trans-unit id="module.button.importPageTree"><source>Import page structure</source></trans-unit>
 
             <trans-unit id="module.import.done"><source>%d example events and %d contacts created in the new folder "%s" (page %d).</source></trans-unit>
             <trans-unit id="module.import.alreadyImported"><source>The example content is already there: folder "%s" (page %d). Delete that folder to import again.</source></trans-unit>
             <trans-unit id="module.import.failed"><source>The import failed: %s</source></trans-unit>
+
+            <trans-unit id="module.pagetree.done"><source>Created %d pages with %d plugins, starting at page %d, and filled them with %d example events and %d contacts. The storage folder (page %d) is now set in the extension configuration.</source></trans-unit>
+            <trans-unit id="module.pagetree.alreadyImported"><source>The example page structure is already there (page %d). Delete that page to import again.</source></trans-unit>
+            <trans-unit id="module.pagetree.failed"><source>The page structure could not be imported: %s</source></trans-unit>
+            <trans-unit id="module.pagetree.contentFailed"><source>The page structure was created (page %d), but importing the example content into it failed: %s</source></trans-unit>
 
             <trans-unit id="module.config.intro"><source>Extension configuration under Admin Tools &gt; Extensions &gt; Rubin Events:</source></trans-unit>
             <trans-unit id="module.config.notSet"><source>not set</source></trans-unit>
@@ -35,6 +42,7 @@
             <trans-unit id="module.config.hint.defaultZoom"><source>Whole number between 1 (world) and 18 (street level).</source></trans-unit>
             <trans-unit id="module.config.hint.defaultLat"><source>Latitude between -90 and 90, e.g. 51.5.</source></trans-unit>
             <trans-unit id="module.config.hint.defaultLon"><source>Longitude between -180 and 180, e.g. 9.5.</source></trans-unit>
+            <trans-unit id="module.config.hint.defaultColPos"><source>Whole number, 0 or greater. The column the page structure importer places its plugins in.</source></trans-unit>
 
             <trans-unit id="module.empty.title"><source>No events yet</source></trans-unit>
             <trans-unit id="module.empty.message"><source>Once event records exist, they show up here.</source></trans-unit>

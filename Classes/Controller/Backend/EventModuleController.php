@@ -13,15 +13,15 @@ namespace PageaDev\RubinEvents\Controller\Backend;
 
 use PageaDev\RubinEvents\Domain\Model\Event;
 use PageaDev\RubinEvents\Domain\Repository\EventRepository;
+use PageaDev\RubinEvents\Service\ConfigurationCheck;
 use PageaDev\RubinEvents\Service\ExampleContentImporter;
+use PageaDev\RubinEvents\Service\PageTreeImporter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Attribute\AsController;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
@@ -49,9 +49,10 @@ final class EventModuleController
         private readonly EventRepository $eventRepository,
         private readonly UriBuilder $uriBuilder,
         private readonly IconFactory $iconFactory,
-        private readonly ExtensionConfiguration $extensionConfiguration,
+        private readonly ConfigurationCheck $configurationCheck,
         private readonly FlashMessageService $flashMessageService,
         private readonly ExampleContentImporter $exampleContentImporter,
+        private readonly PageTreeImporter $pageTreeImporter,
     ) {}
 
     public function handleRequest(ServerRequestInterface $request): ResponseInterface
@@ -60,8 +61,10 @@ final class EventModuleController
 
         // Writing actions redirect back to the plain module URL afterwards, so a reload of the
         // result page cannot repeat the write
-        if (($request->getQueryParams()['action'] ?? '') === 'importExamples') {
-            $this->importExamples();
+        $action = (string)($request->getQueryParams()['action'] ?? '');
+
+        if ($action === 'importExamples' || $action === 'importPageTree') {
+            $action === 'importExamples' ? $this->importExamples() : $this->importPageTree();
 
             return new RedirectResponse($returnUrl);
         }
@@ -69,7 +72,6 @@ final class EventModuleController
         $view = $this->moduleTemplateFactory->create($request);
 
         [$upcoming, $past] = $this->collectEvents();
-        $configuration = $this->checkConfiguration();
 
         $this->addDocHeaderButtons($view->getDocHeaderComponent()->getButtonBar(), $returnUrl);
 
@@ -78,76 +80,12 @@ final class EventModuleController
         return $view->assignMultiple([
             'upcoming' => $this->decorate($upcoming, $returnUrl),
             'past' => $this->decorate($past, $returnUrl),
-            'storagePid' => $this->getStoragePid(),
-            'configuredStoragePid' => $this->getConfiguredStoragePid(),
+            'storagePid' => $this->configurationCheck->storagePid(),
+            'configuredStoragePid' => $this->configurationCheck->configuredStoragePid(),
             'newEventUrl' => $this->buildNewRecordUrl($returnUrl),
-            'configuration' => $configuration,
-            'configurationState' => $this->configurationState($configuration),
+            'configuration' => $this->configurationCheck->settings(),
+            'configurationState' => $this->configurationCheck->state(),
         ])->renderResponse('Backend/EventList');
-    }
-
-    /**
-     * State of every extension setting that can actually be wrong.
-     *
-     * useSwiper is left out on purpose: a checkbox is either on or off, there is no invalid value
-     * to report, and counting it would make the "everything is wrong" case unreachable.
-     *
-     * @return list<array{key: string, value: string, valid: bool}>
-     */
-    private function checkConfiguration(): array
-    {
-        try {
-            $settings = $this->extensionConfiguration->get('rubin_events');
-        } catch (\Throwable) {
-            $settings = [];
-        }
-
-        $zoom = (string)($settings['defaultZoom'] ?? '');
-        $lat = (string)($settings['defaultLat'] ?? '');
-        $lon = (string)($settings['defaultLon'] ?? '');
-        $storagePid = (string)($settings['storagePid'] ?? '');
-
-        return [
-            [
-                'key' => 'storagePid',
-                'value' => $storagePid,
-                // Not just "is a number": a PID pointing at a page that does not exist is the
-                // failure this module ran into before, so the page has to resolve
-                'valid' => $this->getStoragePid() > 0,
-            ],
-            [
-                'key' => 'defaultZoom',
-                'value' => $zoom,
-                'valid' => ctype_digit($zoom) && (int)$zoom >= 1 && (int)$zoom <= 18,
-            ],
-            [
-                'key' => 'defaultLat',
-                'value' => $lat,
-                'valid' => is_numeric($lat) && (float)$lat >= -90 && (float)$lat <= 90,
-            ],
-            [
-                'key' => 'defaultLon',
-                'value' => $lon,
-                'valid' => is_numeric($lon) && (float)$lon >= -180 && (float)$lon <= 180,
-            ],
-        ];
-    }
-
-    /**
-     * Infobox state for the settings indicator: nothing wrong is green, everything wrong is red,
-     * anything in between yellow.
-     *
-     * @param list<array{key: string, value: string, valid: bool}> $configuration
-     */
-    private function configurationState(array $configuration): int
-    {
-        $invalid = count(array_filter($configuration, static fn(array $setting): bool => !$setting['valid']));
-
-        if ($invalid === 0) {
-            return 0; // ok / green
-        }
-
-        return $invalid === count($configuration) ? 2 : 1; // error / red, warning / yellow
     }
 
     /**
@@ -205,7 +143,7 @@ final class EventModuleController
     private function addDocHeaderButtons(ButtonBar $buttonBar, string $returnUrl): void
     {
         $languageService = $this->getLanguageService();
-        $hasStorage = $this->getStoragePid() > 0;
+        $hasStorage = $this->configurationCheck->storagePid() > 0;
 
         if ($hasStorage) {
             $newButton = $buttonBar->makeLinkButton()
@@ -217,9 +155,17 @@ final class EventModuleController
             $buttonBar->addButton($newButton, ButtonBar::BUTTON_POSITION_LEFT);
         }
 
-        // Top right, next to the shortcut button. Independent of the configured storage PID: the
-        // import brings its own folder along, which is exactly what makes it useful on a fresh
-        // installation where nothing is configured yet.
+        // Top right, next to the shortcut button. Both imports are independent of the configured
+        // storage PID: they bring their folder along, which is exactly what makes them useful on a
+        // fresh installation where nothing is configured yet.
+        $pageTreeButton = $buttonBar->makeLinkButton()
+            ->setHref((string)$this->uriBuilder->buildUriFromRoute('web_rubinevents', ['action' => 'importPageTree']))
+            ->setTitle($languageService->sL(self::LL . 'module.button.importPageTree'))
+            ->setShowLabelText(true)
+            ->setIcon($this->iconFactory->getIcon('actions-pagetree', IconSize::SMALL));
+
+        $buttonBar->addButton($pageTreeButton, ButtonBar::BUTTON_POSITION_RIGHT);
+
         $importButton = $buttonBar->makeLinkButton()
             ->setHref((string)$this->uriBuilder->buildUriFromRoute('web_rubinevents', ['action' => 'importExamples']))
             ->setTitle($languageService->sL(self::LL . 'module.button.importExamples'))
@@ -274,10 +220,77 @@ final class EventModuleController
     }
 
     /**
+     * Runs the page structure import and fills the storage folder it created with the example
+     * content, so what comes out is a setup that already works instead of empty pages.
+     *
+     * The structure is the part that cannot be repeated, so a failing content import is reported
+     * as a warning rather than swallowing the fact that the pages are there.
+     */
+    private function importPageTree(): void
+    {
+        $existing = $this->pageTreeImporter->findExistingRoot();
+
+        if ($existing > 0) {
+            $this->addFlashMessage(
+                'module.pagetree.alreadyImported',
+                ContextualFeedbackSeverity::INFO,
+                [$existing],
+                'module.button.importPageTree'
+            );
+
+            return;
+        }
+
+        try {
+            $structure = $this->pageTreeImporter->import($this->backendLanguage());
+        } catch (\Throwable $exception) {
+            $this->addFlashMessage(
+                'module.pagetree.failed',
+                ContextualFeedbackSeverity::ERROR,
+                [$exception->getMessage()],
+                'module.button.importPageTree'
+            );
+
+            return;
+        }
+
+        try {
+            $content = $this->exampleContentImporter->import($structure['storagePid']);
+        } catch (\Throwable $exception) {
+            $this->addFlashMessage(
+                'module.pagetree.contentFailed',
+                ContextualFeedbackSeverity::WARNING,
+                [$structure['root'], $exception->getMessage()],
+                'module.button.importPageTree'
+            );
+
+            return;
+        }
+
+        $this->addFlashMessage(
+            'module.pagetree.done',
+            ContextualFeedbackSeverity::OK,
+            [
+                $structure['pages'],
+                $structure['content'],
+                $structure['root'],
+                $content['events'],
+                $content['contacts'],
+                $structure['storagePid'],
+            ],
+            'module.button.importPageTree'
+        );
+    }
+
+    /**
      * @param list<string|int> $arguments
      */
-    private function addFlashMessage(string $key, ContextualFeedbackSeverity $severity, array $arguments = []): void
-    {
+    private function addFlashMessage(
+        string $key,
+        ContextualFeedbackSeverity $severity,
+        array $arguments = [],
+        string $titleKey = 'module.button.importExamples',
+    ): void {
         $message = $this->getLanguageService()->sL(self::LL . $key);
 
         if ($arguments !== []) {
@@ -287,7 +300,7 @@ final class EventModuleController
         $this->flashMessageService->getMessageQueueByIdentifier()->enqueue(
             new FlashMessage(
                 $message,
-                $this->getLanguageService()->sL(self::LL . 'module.button.importExamples'),
+                $this->getLanguageService()->sL(self::LL . $titleKey),
                 $severity,
                 true
             )
@@ -297,38 +310,17 @@ final class EventModuleController
     private function buildNewRecordUrl(string $returnUrl): string
     {
         return (string)$this->uriBuilder->buildUriFromRoute('record_edit', [
-            'edit' => [self::TABLE => [$this->getStoragePid() => 'new']],
+            'edit' => [self::TABLE => [$this->configurationCheck->storagePid() => 'new']],
             'returnUrl' => $returnUrl,
         ]);
     }
 
     /**
-     * Raw storage PID from the extension configuration, without checking whether it resolves.
+     * Language the backend user works in, used to pick the page structure dump.
      */
-    private function getConfiguredStoragePid(): int
+    private function backendLanguage(): ?string
     {
-        try {
-            $configuration = $this->extensionConfiguration->get('rubin_events');
-        } catch (\Throwable) {
-            return 0;
-        }
-
-        return (int)($configuration['storagePid'] ?? 0);
-    }
-
-    /**
-     * Folder new records are created in. Returns 0 when the configured page does not exist, so the
-     * module never offers a "new record" link that FormEngine would reject afterwards.
-     */
-    private function getStoragePid(): int
-    {
-        $storagePid = $this->getConfiguredStoragePid();
-
-        if ($storagePid <= 0) {
-            return 0;
-        }
-
-        return BackendUtility::getRecord('pages', $storagePid, 'uid') !== null ? $storagePid : 0;
+        return $this->getLanguageService()->getLocale()?->getLanguageCode();
     }
 
     private function getLanguageService(): LanguageService

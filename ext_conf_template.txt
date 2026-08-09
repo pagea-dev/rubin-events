@@ -10,5 +10,8 @@ defaultLon = 9.5
 # cat=basic/int/40; type=int+; label=Storage PID (Backend record folder)
 storagePid = 14
 
-# cat=basic/enable/50; type=boolean; label=Load Swiper: ship the bundled Swiper element with the slider list style. Turn this off if your site package already provides Swiper, otherwise it is loaded twice.
+# cat=basic/int/50; type=int+; label=Default Column Position: colPos the page structure importer places its plugins in. 0 is the main column of most backend layouts; change it if your site package uses a different one.
+defaultColPos = 0
+
+# cat=basic/enable/60; type=boolean; label=Load Swiper: ship the bundled Swiper element with the slider list style. Turn this off if your site package already provides Swiper, otherwise it is loaded twice.
 useSwiper = 1

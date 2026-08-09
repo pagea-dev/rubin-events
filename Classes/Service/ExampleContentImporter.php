@@ -64,14 +64,27 @@ final class ExampleContentImporter
     }
 
     /**
-     * Creates the storage folder, copies the images into FAL and runs the dump into it.
+     * True when a previous run already put example records into that page.
+     */
+    public function hasContentIn(int $pageUid): bool
+    {
+        return $this->countIn('fe_users', $pageUid) > 0 || $this->countIn(self::EVENT_TABLE, $pageUid) > 0;
+    }
+
+    /**
+     * Copies the images into FAL and runs the dump into a storage folder.
      *
+     * Without a target the importer creates its own folder, which is what the standalone "import
+     * examples" button does. The page structure importer passes the folder from the structure it
+     * just built instead, so the example events end up where its plugins are looking.
+     *
+     * @param int|null $targetPid storage folder to import into, null creates a new one
      * @return array{pageUid: int, contacts: int, events: int, files: int}
      * @throws \RuntimeException when the folder cannot be created or the dump is unreadable
      */
-    public function import(): array
+    public function import(?int $targetPid = null): array
     {
-        $pageUid = $this->createFolder();
+        $pageUid = $targetPid !== null && $targetPid > 0 ? $targetPid : $this->createFolder();
         $files = $this->importImages();
         $statements = $this->readDump();
 
