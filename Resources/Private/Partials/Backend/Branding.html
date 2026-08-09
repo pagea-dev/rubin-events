@@ -1,0 +1,46 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:comment>
+    Footer of the backend module: bug report call to action plus the copyright line.
+
+    Styled with the backend's own Bootstrap utility classes only. A separate CSS file would have to
+    be loaded through the PageRenderer for one border and two margins, and would then have to be
+    kept in step with backend theme changes it cannot see.
+</f:comment>
+
+<div class="mt-5 pt-3 border-top">
+
+    <div class="callout callout-info">
+        <div class="callout-content">
+            <div class="callout-title">
+                <f:translate key="LLL:EXT:rubin_events/Resources/Private/Language/locallang_mod.xlf:module.branding.cta.title" />
+            </div>
+            <div class="callout-body">
+                <p><f:translate key="LLL:EXT:rubin_events/Resources/Private/Language/locallang_mod.xlf:module.branding.cta.text" /></p>
+                <a class="btn btn-default"
+                   href="https://github.com/pagea-dev/rubin-events/issues"
+                   target="_blank"
+                   rel="noreferrer">
+                    <core:icon identifier="actions-brand-github" size="small" />
+                    <f:translate key="LLL:EXT:rubin_events/Resources/Private/Language/locallang_mod.xlf:module.branding.cta.button" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <f:comment>
+        The version comes along deliberately: it is the first thing an issue report needs, and it
+        sits right next to the button that opens one.
+    </f:comment>
+    <p class="text-end text-body-secondary mb-0">
+        <small>
+            <f:translate key="LLL:EXT:rubin_events/Resources/Private/Language/locallang_mod.xlf:module.branding.copyright"
+                         arguments="{0: extensionVersion}" />
+        </small>
+    </p>
+
+</div>
+
+</html>
