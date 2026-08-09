@@ -1,10 +1,39 @@
-# Rubin Events — TYPO3 Event Management Extension
+# Rubin Events
 
-A simple event management extension for TYPO3 v13 and v14. Create, display and archive club events with optional map location (OpenStreetMap).
+**Event management for TYPO3 — done right.**
+
+Rubin Events is a lightweight yet powerful TYPO3 extension for creating, managing and presenting
+events. It ships with an editor-friendly backend module, a built-in map picker (OpenStreetMap /
+Leaflet) for event locations, and flexible frontend output as list, slider or archive. Built for
+TYPO3 v13 and v14 on PHP 8.1+, following current Extbase best practices — no legacy code, no
+unnecessary dependencies.
 
 ---
 
-## Requirements
+<details>
+<summary><strong>✨ Features</strong></summary>
+
+### Dashboard list for easy overview of data when logging in<br>
+<img style="width: 100%; height: auto;" width="1632" height="669" alt="image" src="https://github.com/user-attachments/assets/e84e29db-982b-4689-8243-be02bb0d1395" /><br>
+
+### An intuitiv backend module where you can administrate your events comfortable<br>
+<img style="width: 100%; height: auto;" width="2003" height="1195" alt="image" src="https://github.com/user-attachments/assets/e7d58567-3afb-4da7-b5d8-25af64b45425" /><br>
+
+### Intuitive location settings directly while in Resource/List view<br>
+<img style="width: 100%; height: auto;" width="2305" height="963" alt="image" src="https://github.com/user-attachments/assets/53a0a950-5e01-443f-9fb8-de26a3f89dcf" /><br>
+
+### FE-User implementation: use fe_users for contacts<br>
+<img style="width: 100%; height: auto;" width="1981" height="680" alt="image" src="https://github.com/user-attachments/assets/3126cf63-38f9-47f3-b590-a43773c4feb7" /><br>
+
+### No need to start from scratch every time: Say hello to our example importer<br>
+<img style="width: 100%; height: auto;" width="1137" height="220" alt="image" src="https://github.com/user-attachments/assets/88860261-5b5c-47fd-a6b6-8cba21cf1e7a" /><br>
+
+</details>
+
+---
+
+<details>
+<summary><strong>📋 Requirements</strong></summary>
 
 | Component | Version |
 |---|---|
@@ -12,9 +41,12 @@ A simple event management extension for TYPO3 v13 and v14. Create, display and a
 | PHP | ^8.1 |
 | fe_users | Included with TYPO3 core |
 
+</details>
+
 ---
 
-## Installation
+<details>
+<summary><strong>📦 Installation</strong></summary>
 
 ```bash
 composer require pagea-dev/rubin-events
@@ -34,9 +66,12 @@ ddev composer require pagea-dev/rubin-events
 ddev typo3 cache:flush
 ```
 
+</details>
+
 ---
 
-## Setup
+<details>
+<summary><strong>🛠️ Setup</strong></summary>
 
 ### 1. Include the TYPO3 Set
 
@@ -68,9 +103,12 @@ In the backend under **Admin Tools → Extensions → Rubin Events**, configure 
 
 These values are used as fallback by the Map Picker when no coordinates have been saved yet.
 
+</details>
+
 ---
 
-## Adding Plugins
+<details>
+<summary><strong>🧩 Adding Plugins</strong></summary>
 
 Three plugins are available, each inserted as a **content element** on a page:
 
@@ -132,9 +170,12 @@ Displays past events.
 | Back page (pidList) | Target page for the back button |
 | Limit | Maximum number of events shown |
 
+</details>
+
 ---
 
-## Creating Events
+<details>
+<summary><strong>📅 Creating Events</strong></summary>
 
 Events are created as records inside the configured SysFolder. In the backend go to **Web → List → [select SysFolder] → New record → Rubin Event**.
 
@@ -158,9 +199,12 @@ Events are created as records inside the configured SysFolder. In the backend go
 
 Standard TYPO3 tabs for translation, visibility and access control.
 
+</details>
+
 ---
 
-## Map Picker (Map Location)
+<details>
+<summary><strong>🗺️ Map Picker (Map Location)</strong></summary>
 
 The **Map location** field uses a custom backend form element (`rubinEventsMapPicker`) that renders an interactive OpenStreetMap inside the backend form.
 
@@ -178,9 +222,17 @@ The **Map location** field uses a custom backend form element (`rubinEventsMapPi
 
 The map is powered by [Leaflet.js](https://leafletjs.com/), bundled locally inside the extension at `Resources/Public/JavaScript/Lib/Leaflet/` — no external runtime dependency is added to the backend.
 
+<br>
+
+<img style="width: 100%; height: auto;" width="2233" height="722" alt="image" src="https://github.com/user-attachments/assets/4b52129a-c823-41f2-bbba-dabdd491d73f" />
+
+
+</details>
+
 ---
 
-## Modal (compact detail view)
+<details>
+<summary><strong>🪟 Modal (compact detail view)</strong></summary>
 
 Every list view renders a **"More info"** button per event. What it does is decided by the
 **"More" button behavior** setting:
@@ -215,9 +267,12 @@ modal.
 Styling lives in `rubinevents.scss`. A minimal critical stylesheet is inlined by the partial, so the
 modal is usable (width, backdrop, hidden fields, line breaks) even without the extension SCSS.
 
+</details>
+
 ---
 
-## Slider (Swiper)
+<details>
+<summary><strong>🎠 Slider (Swiper)</strong></summary>
 
 List style **Slider** (`0`) renders the events as a [Swiper](https://swiperjs.com/) carousel, using
 Swiper's custom element (`<swiper-container>` / `<swiper-slide>`). Version 14.1.0 is bundled locally
@@ -231,9 +286,12 @@ second time. No other slider library is included either way.
 The asset is pulled in by the partial itself via `f:asset.script`, so it only lands on pages that
 actually render a slider, and no TypoScript setup is required.
 
+</details>
+
 ---
 
-## Template Overrides
+<details>
+<summary><strong>🎨 Template Overrides</strong></summary>
 
 Templates, partials and layouts can be overridden via site settings:
 
@@ -261,11 +319,17 @@ Empty values (default) mean the extension's own templates are used.
 | `Partials/Event/MoreButton.html` | "More info" trigger — modal button or detail link |
 | `Partials/Event/Modal.html` | Modal shell for the compact detail view |
 
+</details>
+
 ---
 
-## Map in the Detail View
+<details>
+<summary><strong>📍 Map in the Detail View</strong></summary>
 
 When an event has coordinates set (see *Map Picker*), the detail view renders `Partials/Event/Map.html`: an interactive Leaflet map centered on the event, followed by two buttons that open the location in **OpenStreetMap** and in **Google Maps**.
+
+<img style="width: 100%; height: auto;" width="989" height="633" alt="image" src="https://github.com/user-attachments/assets/e8f9f82c-49f5-4c0b-a9ec-8061baff3d0b" />
+
 
 Leaflet's CSS and JS are pulled in by the partial itself via `f:asset.css` / `f:asset.script`, so they are only loaded on pages that actually show a map — no TypoScript setup required. Leaflet is bundled locally in `Resources/Public/JavaScript/Lib/Leaflet/`; only the map tiles are fetched from `tile.openstreetmap.org`, which `Configuration/ContentSecurityPolicies.php` allows for both backend and frontend scope.
 
@@ -273,15 +337,21 @@ Scroll wheel zoom is disabled until the map has focus, so scrolling past the map
 
 The map container needs an explicit height — it is styled in `Resources/Private/Scss/rubinevents.scss` (`.map-canvas`, default `350px`). If you do not load the extension's SCSS, set a height yourself, otherwise the map stays invisible.
 
+</details>
+
 ---
 
-## Backend Module
+<details>
+<summary><strong>🖥️ Backend Module</strong></summary>
 
 **Web → Events** lists every event record, regardless of which folder it is stored in, split into
 upcoming and past. Each row links straight into the record editor and returns to the module
 afterwards. The doc header carries a *New event* button, which creates the record in the storage
 folder from the extension configuration — if no storage PID is set there, the button is hidden and
 the module says so.
+
+<img style="width: 100%; height: auto;" width="2013" height="774" alt="image" src="https://github.com/user-attachments/assets/c5f77cb6-8886-409e-9308-11ad5bab7c5e" />
+
 
 ### Settings indicator
 
@@ -343,19 +413,27 @@ The module is registered through `Configuration/Backend/Modules.php` using the r
 backend controller. Registration, `ModuleTemplateFactory`, `ButtonBar` and the `Module` Fluid layout
 work the same way in TYPO3 v13 and v14, so the module needs no version switches.
 
+</details>
+
 ---
 
-## Dashboard Widget
+<details>
+<summary><strong>📊 Dashboard Widget</strong></summary>
 
 The extension registers a backend dashboard widget **"Upcoming Events"** that lists the next events and provides a **"Create Event"** button. The widget is available immediately after installation via **Dashboard → Add widget → Rubin Events**.
 
+</details>
+
 ---
 
-## Custom ViewHelper
+<details>
+<summary><strong>🔧 Custom ViewHelper</strong></summary>
 
 `r:format.localizedDate` — formats a date/time value in the configured site language.
 
 Fluid namespace: `xmlns:r="http://typo3.org/ns/PageaDev/RubinEvents/ViewHelpers"`
+
+</details>
 
 ---
 
