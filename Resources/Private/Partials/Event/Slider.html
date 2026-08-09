@@ -3,28 +3,21 @@
       data-namespace-typo3-fluid="true">
 
 
-    <div class="multislider" data-tiny-slider='{
-        "controls": true, "nav": false, "slideBy": 1, "mouseDrag": true, "gutter": 24,
-        "controlsPosition": "bottom", "navPosition": "bottom",
-        "controlsText": [
-            "<i class=\"rubinicon-arrow_back\"></i>",
-            "<i class=\"rubinicon-arrow_forward\"></i>"
-        ],
-        "responsive": {
-            "0": {
-            "items": 1
-            },
-            "576": {
-            "items": 2
-            },
-            "768": {
-            "items": 3
-            }
-        }
-    }'>
+    <f:if condition="{loadSwiper}">
+        <f:asset.script identifier="rubinevents-swiper" src="EXT:rubin_events/Resources/Public/JavaScript/Lib/Swiper/swiper-element-bundle.min.js" />
+    </f:if>
+
+    <swiper-container class="multislider"
+                      slides-per-view="1"
+                      space-between="24"
+                      navigation="true"
+                      breakpoints='{
+                          "576": { "slidesPerView": 2 },
+                          "768": { "slidesPerView": 3 }
+                      }'>
 
         <f:for each="{events}" as="event" iteration="i">
-            <div class="item item-{i.index}">
+            <swiper-slide class="item item-{i.index}">
                 <div class="event-inner d-flex flex-wrap justify-content-start align-items-center">
                     
                     <div class="text-area">
@@ -63,18 +56,18 @@
                         </f:if>
                     </div>
                     <div class="readmore">
-                        <f:link.action class="btn btn-ghost" pageUid="{settings.pidShow}" action="show" arguments="{event: event, pidList: listPid}"><f:translate key="tinyslider.readmore" extensionName="RubinEvents" /></f:link.action>
+                        <f:render partial="Event/MoreButton" arguments="{event: event, settings: settings, listPid: listPid, class: 'btn btn-ghost'}" />
                     </div>
                         
                 </div>
-            </div>
+            </swiper-slide>
         </f:for>
 
-    </div>
+    </swiper-container>
 
     <f:if condition="{settings.pidList}">
         <div class="list-button">
-            <f:link.action action="list" pageUid="{settings.pidList}" class="btn btn-primary"><f:translate key="tinyslider.allEvents" extensionName="RubinEvents" /></f:link.action>
+            <f:link.action action="list" pageUid="{settings.pidList}" class="btn btn-primary"><f:translate key="slider.allEvents" extensionName="RubinEvents" /></f:link.action>
         </div>
     </f:if>
 </html> 

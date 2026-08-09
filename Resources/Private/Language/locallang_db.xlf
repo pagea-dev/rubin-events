@@ -133,7 +133,7 @@
                 <source>List Style</source>
             </trans-unit>
             <trans-unit id="flexform.settings.listStyle.0">
-                <source>Slider (requires TinySlider)</source>
+                <source>Slider (Swiper)</source>
             </trans-unit>
             <trans-unit id="flexform.settings.listStyle.1">
                 <source>Normal Table</source>

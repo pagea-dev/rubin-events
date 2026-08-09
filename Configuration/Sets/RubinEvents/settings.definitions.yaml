@@ -7,9 +7,6 @@ categories:
   RubinEvents.persistence:
     label: 'Persistence'
     parent: RubinEvents
-  RubinEvents.layout:
-    label: 'Layout'
-    parent: RubinEvents
 
 settings:
   rubinevents.templateRootPath:
@@ -59,9 +56,4 @@ settings:
     type: int
     default: 0
 
-  rubinevents.useTinyslider:
-    label: 'Use TinySlider'
-    description: 'Load the TinySlider CSS and JS assets'
-    category: RubinEvents.layout
-    type: bool
     default: false

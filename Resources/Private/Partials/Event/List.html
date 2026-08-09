@@ -11,6 +11,7 @@
                 <th><f:translate key="bslist.col.title" extensionName="RubinEvents" /></th>
                 <th class="d-none d-md-table-cell"><f:translate key="bslist.col.description" extensionName="RubinEvents" /></th>
                 <th class="d-none d-lg-table-cell"><f:translate key="bslist.col.location" extensionName="RubinEvents" /></th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,9 @@
                     </td>
                     <td class="d-none d-lg-table-cell">
                         {event.location}
+                    </td>
+                    <td class="text-end">
+                        <f:render partial="Event/MoreButton" arguments="{event: event, settings: settings, listPid: listPid, class: 'btn btn-primary btn-sm', variant: 'icon'}" />
                     </td>
                 </tr>
             </f:for>

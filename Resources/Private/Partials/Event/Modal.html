@@ -1,0 +1,73 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:r="http://typo3.org/ns/PageaDev/RubinEvents/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <!--
+        Empty shell for the compact detail view, rendered once per plugin. EventModal.js fills it
+        from the data attributes of the clicked trigger (see Partials/Event/MoreButton.html), so
+        opening an event costs no request.
+    -->
+
+    <f:asset.script identifier="rubinevents-eventmodal" src="EXT:rubin_events/Resources/Public/JavaScript/EventModal.js" />
+
+    <!-- Bare minimum so the modal also works without the extension SCSS: a native dialog has no
+         backdrop colour and no width of its own, and [hidden] loses against the display rules the
+         fields carry. rubinevents.scss overrides all of this via higher specificity. -->
+    <f:asset.css identifier="rubinevents-modal-fallback">
+        .rubin-events-modal { border: 0; padding: 0; width: min(640px, calc(100% - 32px)); max-height: calc(100vh - 64px); overflow: auto; }
+        .rubin-events-modal::backdrop { background: rgba(0, 0, 0, .5); }
+        .rubin-events-modal [hidden] { display: none !important; }
+        .rubin-events-modal .modal-inner { position: relative; padding: 24px; }
+        .rubin-events-modal .modal-close { position: absolute; top: 4px; right: 8px; border: 0; background: transparent; font-size: 32px; line-height: 1; cursor: pointer; }
+        .rubin-events-modal .modal-title { margin-right: 40px; }
+        .rubin-events-modal .event-description { white-space: pre-line; }
+        html.rubin-events-modal-open { overflow: hidden; }
+    </f:asset.css>
+
+    <dialog class="rubin-events-modal" data-rubin-event-dialog aria-label="{f:translate(key: 'modal.label', extensionName: 'RubinEvents')}">
+
+        <div class="modal-inner">
+
+            <!-- A literal × instead of a rubinicon, so the button stays usable on sites that do
+                 not load the extension's icon font -->
+            <button type="button" class="modal-close" data-rubin-event-dialog-close
+                    aria-label="{f:translate(key: 'modal.close', extensionName: 'RubinEvents')}">&times;</button>
+
+            <h2 class="modal-title" data-field="title"></h2>
+
+            <div class="event-meta">
+
+                <div class="icontext" data-optional>
+                    <div class="ico"><i class="rubinicon-calendar_today" aria-hidden="true"></i></div>
+                    <div class="text" data-field="date"></div>
+                </div>
+
+                <div class="icontext" data-optional>
+                    <div class="ico"><i class="rubinicon-location_on" aria-hidden="true"></i></div>
+                    <div class="text" data-field="location"></div>
+                </div>
+
+            </div>
+
+            <p class="event-teaser" data-optional><i data-field="teaser"></i></p>
+
+            <div class="event-description" data-optional data-field="description"></div>
+
+            <div class="map-links" data-map-links hidden>
+                <a href="#" class="btn btn-outline-secondary" data-map-link="osm"
+                   target="_blank" rel="noopener noreferrer">
+                    <i class="rubinicon-location_on" aria-hidden="true"></i>
+                    <f:translate key="show.map.osm" extensionName="RubinEvents" />
+                </a>
+                <a href="#" class="btn btn-outline-secondary" data-map-link="google"
+                   target="_blank" rel="noopener noreferrer">
+                    <i class="rubinicon-location_on" aria-hidden="true"></i>
+                    <f:translate key="show.map.google" extensionName="RubinEvents" />
+                </a>
+            </div>
+
+        </div>
+
+    </dialog>
+
+</html>

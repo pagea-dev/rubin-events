@@ -64,6 +64,7 @@ In the backend under **Admin Tools → Extensions → Rubin Events**, configure 
 | Default Latitude | Map center latitude on first load | `51.5` |
 | Default Longitude | Map center longitude on first load | `9.5` |
 | Storage PID | Default folder PID for new backend records | `14` |
+| Load Swiper | Ship the bundled Swiper element with the slider list style | on |
 
 These values are used as fallback by the Map Picker when no coordinates have been saved yet.
 
@@ -83,8 +84,8 @@ Displays upcoming events.
 |---|---|
 | Storage PID | Folder page from which events are loaded |
 | List page (pidList) | Where the detail view returns to — see below |
-| List style | Rendering variant (default list, Bootstrap list, TinySlider) |
-| "More" button behavior | Inline display or redirect to detail page |
+| List style | Rendering variant (Swiper slider, default list, Bootstrap list) |
+| "More" button behavior | Open a modal or link to the detail page — see *Modal* |
 | Detail page (pidShow) | Only shown when "more" button is set to redirect |
 | Limit | Maximum number of events shown (1–100, default: 10) |
 
@@ -94,14 +95,14 @@ one detail page can serve several lists sitting on different pages, each returni
 
 Leave the field empty and the plugin hands over **the page it is placed on**, so the visitor returns
 to where they came from without any configuration. Set it explicitly only when the back button should
-lead somewhere else — note that the TinySlider variant also renders its "all events" button from this
+lead somewhere else — note that the slider variant also renders its "all events" button from this
 field, and only when it is set.
 
 **List style values:**
 
 | Value | Description |
 |---|---|
-| `0` | TinySlider (carousel) |
+| `0` | Swiper slider (carousel) |
 | `1` | Default tile list (default) |
 | `2` | Bootstrap list |
 
@@ -126,7 +127,7 @@ Displays past events.
 
 | Field | Description |
 |---|---|
-| List style | Default tile list or Bootstrap list (TinySlider not available) |
+| List style | Default tile list or Bootstrap list (slider not available) |
 | Storage PID | Folder page from which events are loaded |
 | Back page (pidList) | Target page for the back button |
 | Limit | Maximum number of events shown |
@@ -179,9 +180,56 @@ The map is powered by [Leaflet.js](https://leafletjs.com/), bundled locally insi
 
 ---
 
-## TinySlider
+## Modal (compact detail view)
 
-When list style **TinySlider** (`0`) is used, asset loading must be enabled. Set `rubinevents.useTinyslider: 1` in your site settings (enabled by default). TypoScript will then include `tiny-slider.js` and `tiny-slider.min.css` automatically. Otherwise, if you already implement TinySlider, you have to disable it, so it doesn't load twice.
+Every list view renders a **"More info"** button per event. What it does is decided by the
+**"More" button behavior** setting:
+
+| Value | Behavior |
+|---|---|
+| `0` | Opens a modal with a compact detail view (default) |
+| `1` | Links to the configured detail page (`pidShow`) |
+
+The modal shows title, date, location, teaser, description and — when the event has coordinates —
+the OpenStreetMap and Google Maps links. Contacts and the interactive map stay reserved for the full
+detail view.
+
+It is built on the native `<dialog>` element and driven by
+`Resources/Public/JavaScript/EventModal.js` — plain vanilla JS, no framework, no Bootstrap. ESC and
+focus handling come from the browser; the script adds backdrop click, the close button and the
+scroll lock. The asset is pulled in by the partial via `f:asset.script`, so it only lands on pages
+that actually render a modal.
+
+**No request is made when opening.** Each trigger carries its data in attributes
+(`data-title`, `data-date`, `data-date-end`, `data-location`, `data-teaser`, `data-description`,
+`data-lat`, `data-lon`), and `Partials/Event/Modal.html` is an empty shell that gets filled on
+click. Values are written with `textContent`, so event data can never inject markup. Empty fields
+hide their whole row.
+
+One shell is rendered per plugin, and a trigger always fills the shell inside its own
+`.rubin-events` wrapper — several event plugins on one page do not interfere with each other.
+
+The **archive plugin** has no behavior setting and no detail page, so its buttons always open the
+modal.
+
+Styling lives in `rubinevents.scss`. A minimal critical stylesheet is inlined by the partial, so the
+modal is usable (width, backdrop, hidden fields, line breaks) even without the extension SCSS.
+
+---
+
+## Slider (Swiper)
+
+List style **Slider** (`0`) renders the events as a [Swiper](https://swiperjs.com/) carousel, using
+Swiper's custom element (`<swiper-container>` / `<swiper-slide>`). Version 14.1.0 is bundled locally
+in `Resources/Public/JavaScript/Lib/Swiper/`.
+
+Whether the extension ships that file is controlled by the **Load Swiper** checkbox in the extension
+configuration (*Admin Tools > Extensions > Rubin Events*, on by default). Switch it off when your
+site package already delivers Swiper — the markup stays the same, only the library is not loaded a
+second time. No other slider library is included either way.
+
+The asset is pulled in by the partial itself via `f:asset.script`, so it only lands on pages that
+actually render a slider, and no TypoScript setup is required.
 
 ---
 
@@ -207,9 +255,11 @@ Empty values (default) mean the extension's own templates are used.
 | `Templates/Event/Archive.html` | Archive view |
 | `Partials/Event/List.html` | Default tile partial |
 | `Partials/Event/BsList.html` | Bootstrap list partial |
-| `Partials/Event/TinySlider.html` | TinySlider partial |
+| `Partials/Event/Slider.html` | Swiper slider partial |
 | `Partials/Event/Show.html` | Detail partial |
 | `Partials/Event/Map.html` | Leaflet map incl. external map links |
+| `Partials/Event/MoreButton.html` | "More info" trigger — modal button or detail link |
+| `Partials/Event/Modal.html` | Modal shell for the compact detail view |
 
 ---
 
@@ -222,6 +272,76 @@ Leaflet's CSS and JS are pulled in by the partial itself via `f:asset.css` / `f:
 Scroll wheel zoom is disabled until the map has focus, so scrolling past the map does not trap the page.
 
 The map container needs an explicit height — it is styled in `Resources/Private/Scss/rubinevents.scss` (`.map-canvas`, default `350px`). If you do not load the extension's SCSS, set a height yourself, otherwise the map stays invisible.
+
+---
+
+## Backend Module
+
+**Web → Events** lists every event record, regardless of which folder it is stored in, split into
+upcoming and past. Each row links straight into the record editor and returns to the module
+afterwards. The doc header carries a *New event* button, which creates the record in the storage
+folder from the extension configuration — if no storage PID is set there, the button is hidden and
+the module says so.
+
+### Settings indicator
+
+At the top of the module an infobox reports the state of the extension configuration:
+
+| Colour | Meaning |
+|---|---|
+| Green | No setting is wrong |
+| Yellow | Some settings are wrong |
+| Red | No setting is usable |
+
+Checked are `storagePid` (must resolve to an existing page), `defaultZoom` (1–18), `defaultLat`
+(−90…90) and `defaultLon` (−180…180); each invalid one is listed with its current value and what is
+expected. `useSwiper` is left out — a checkbox has no invalid value, and counting it would make the
+red state unreachable.
+
+### Example import
+
+*Import examples* in the top right of the doc header creates a complete demo dataset:
+
+1. a storage folder **"Rubin Events – Beispieldaten"** at the top level of the page tree,
+2. seven contacts (`fe_users`) with their photos as file references,
+3. eight events inside that folder, each with one to three of those contacts.
+
+It needs no configuration — the folder comes with it, which is the point on a fresh installation
+where nothing is set up yet. Clicking again does nothing but say the content is already there;
+delete the folder to import a second time.
+
+The content lives in `Resources/Private/ExampleContent/`:
+
+```
+ExampleContent/
+  dump.sql        the records
+  images/         the contact photos, copied into fileadmin/rubin_events_examples/ on import
+```
+
+Everything in the dump is invented — names, addresses, `@example.org` mail addresses (reserved for
+documentation by RFC 2606) and coordinates refer to no real person, club or place.
+
+A plain dump cannot know the uids it will get, so the statements use placeholders that
+`ExampleContentImporter` resolves:
+
+| Placeholder | Resolved to |
+|---|---|
+| `###PID###` | uid of the created storage folder |
+| `###FEUSER:<username>###` | uid of that fe_user, imported earlier in the same run |
+| `###FILE:<filename>###` | sys_file uid of that file from `images/` |
+| `###DATE:<offset>\|<HH:MM>###` | timestamp relative to today, e.g. `-28 days\|09:00` |
+
+The date placeholder is what keeps the set useful: the events stay spread around the import date
+instead of drifting into the past. Extending the example content means editing `dump.sql` only, no
+PHP change.
+
+Because raw INSERTs bypass `DataHandler`, the importer updates the reference index for the records
+it wrote — otherwise the file references would show up as broken in the backend.
+
+The module is registered through `Configuration/Backend/Modules.php` using the route form
+(`routes` → controller method) rather than Extbase `controllerActions`, and the controller is a plain
+backend controller. Registration, `ModuleTemplateFactory`, `ButtonBar` and the `Module` Fluid layout
+work the same way in TYPO3 v13 and v14, so the module needs no version switches.
 
 ---
 

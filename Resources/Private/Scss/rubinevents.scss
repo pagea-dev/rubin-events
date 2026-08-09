@@ -59,11 +59,12 @@ $coWhite:             #fbfaf5;
         }
 
         .multislider {
-            display: flex;
-            align-items: stretch;
+            // Swiper builds the track inside its shadow DOM, so no layout is imposed here.
+            // Only the slotted slide content below is ours to style.
+            display: block;
 
             .item {
-                flex-shrink: 0;
+                height: auto;
 
                 .event-inner {
                     height: 100%;
@@ -273,6 +274,139 @@ $coWhite:             #fbfaf5;
                 display: flex;
                 flex-wrap: wrap;
                 gap: 8px;
+            }
+        }
+    }
+}
+
+
+// Compact detail view, opened from the "more info" buttons of the list views. Lives outside
+// .rubin-events on purpose: a native dialog is rendered in the top layer, but it stays a child of
+// the plugin markup, so the class is what makes it addressable.
+.rubin-events-modal {
+    border: 0;
+    padding: 0;
+    width: min(640px, calc(100% - 32px));
+    max-height: calc(100vh - 64px);
+    overflow: auto;
+    border-radius: $defaultBorderRadius;
+    background: $coWhite;
+    color: $coBlack;
+
+    &::backdrop {
+        background: rgba(0, 0, 0, .5);
+    }
+
+    // Beats the display rules the fields below carry, so empty ones really disappear
+    [hidden] {
+        display: none !important;
+    }
+
+    .modal-inner {
+        position: relative;
+        padding: 24px;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        background: transparent;
+        color: $coNeutral;
+        font-size: 28px;
+        line-height: 1;
+        cursor: pointer;
+
+        &:hover {
+            color: $coPrimary;
+        }
+    }
+
+    .modal-title {
+        font-size: 22px;
+        color: $coPrimary;
+        margin: 0 40px 24px 0;
+    }
+
+    .event-meta {
+        margin-bottom: 24px;
+
+        .icontext {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            margin-bottom: 8px;
+
+            .ico {
+                flex: 0 0 32px;
+                font-size: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                i {
+                    color: $coPrimary;
+                }
+            }
+
+            .text {
+                margin-left: 12px;
+                color: $coNeutral;
+            }
+        }
+    }
+
+    .event-teaser {
+        color: $coNeutral;
+        margin-bottom: 16px;
+    }
+
+    .event-description {
+        // textContent keeps the line breaks of the record, this makes them visible
+        white-space: pre-line;
+        margin-bottom: 24px;
+    }
+
+    .map-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+html.rubin-events-modal-open {
+    overflow: hidden;
+}
+
+.rubin-events {
+
+    .view-show {
+
+        .event-contacts {
+
+            .contact {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                gap: 12px;
+
+                .photo {
+                    flex: 0 0 auto;
+
+                    img {
+                        width: 48px;
+                        height: 48px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                }
+
+                .details {
+                    min-width: 0;
+                }
             }
         }
     }

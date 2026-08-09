@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-08-08T00:00:00Z" product-name="rubin_events">
+        <header/>
+        <body>
+            <trans-unit id="mlang_tabs_tab"><source>Events</source><target>Termine</target></trans-unit>
+            <trans-unit id="mlang_labels_tablabel"><source>Event overview</source><target>Terminübersicht</target></trans-unit>
+            <trans-unit id="mlang_labels_tabdescr"><source>Lists all event records, upcoming and past, and links straight into the record editor.</source><target>Listet alle Termin-Datensätze auf, kommende wie vergangene, und verlinkt direkt in die Datensatzbearbeitung.</target></trans-unit>
+
+            <trans-unit id="module.upcoming"><source>Upcoming events</source><target>Kommende Termine</target></trans-unit>
+            <trans-unit id="module.upcoming.empty"><source>No upcoming events.</source><target>Keine kommenden Termine.</target></trans-unit>
+            <trans-unit id="module.past"><source>Past events</source><target>Vergangene Termine</target></trans-unit>
+            <trans-unit id="module.past.empty"><source>No past events.</source><target>Keine vergangenen Termine.</target></trans-unit>
+
+            <trans-unit id="module.col.start"><source>Start</source><target>Beginn</target></trans-unit>
+            <trans-unit id="module.col.end"><source>End</source><target>Ende</target></trans-unit>
+            <trans-unit id="module.col.title"><source>Title</source><target>Titel</target></trans-unit>
+            <trans-unit id="module.col.location"><source>Location</source><target>Ort</target></trans-unit>
+            <trans-unit id="module.col.map"><source>Map</source><target>Karte</target></trans-unit>
+
+            <trans-unit id="module.action.edit"><source>Edit event</source><target>Termin bearbeiten</target></trans-unit>
+            <trans-unit id="module.button.new"><source>New event</source><target>Neuer Termin</target></trans-unit>
+            <trans-unit id="module.button.importExamples"><source>Import examples</source><target>Beispiele importieren</target></trans-unit>
+
+            <trans-unit id="module.import.done"><source>%d example events and %d contacts created in the new folder "%s" (page %d).</source><target>%d Beispieltermine und %d Ansprechpartner im neuen Ordner "%s" (Seite %d) angelegt.</target></trans-unit>
+            <trans-unit id="module.import.alreadyImported"><source>The example content is already there: folder "%s" (page %d). Delete that folder to import again.</source><target>Die Beispieldaten sind bereits vorhanden: Ordner "%s" (Seite %d). Lösche den Ordner, um erneut zu importieren.</target></trans-unit>
+            <trans-unit id="module.import.failed"><source>The import failed: %s</source><target>Der Import ist fehlgeschlagen: %s</target></trans-unit>
+
+            <trans-unit id="module.config.intro"><source>Extension configuration under Admin Tools &gt; Extensions &gt; Rubin Events:</source><target>Extension-Einstellungen unter Admin-Werkzeuge &gt; Erweiterungen &gt; Rubin Events:</target></trans-unit>
+            <trans-unit id="module.config.notSet"><source>not set</source><target>nicht gesetzt</target></trans-unit>
+            <trans-unit id="module.config.state.0"><source>All settings are in order</source><target>Alle Einstellungen sind in Ordnung</target></trans-unit>
+            <trans-unit id="module.config.state.1"><source>Some settings need attention</source><target>Einige Einstellungen stimmen noch nicht</target></trans-unit>
+            <trans-unit id="module.config.state.2"><source>No setting is usable</source><target>Keine Einstellung ist nutzbar</target></trans-unit>
+            <trans-unit id="module.config.hint.storagePid"><source>Must point to an existing page — new events and the example import are created there.</source><target>Muss auf eine existierende Seite zeigen — dort werden neue Termine und der Beispielimport angelegt.</target></trans-unit>
+            <trans-unit id="module.config.hint.defaultZoom"><source>Whole number between 1 (world) and 18 (street level).</source><target>Ganze Zahl zwischen 1 (Welt) und 18 (Straße).</target></trans-unit>
+            <trans-unit id="module.config.hint.defaultLat"><source>Latitude between -90 and 90, e.g. 51.5.</source><target>Breitengrad zwischen -90 und 90, z. B. 51.5.</target></trans-unit>
+            <trans-unit id="module.config.hint.defaultLon"><source>Longitude between -180 and 180, e.g. 9.5.</source><target>Längengrad zwischen -180 und 180, z. B. 9.5.</target></trans-unit>
+
+            <trans-unit id="module.empty.title"><source>No events yet</source><target>Noch keine Termine</target></trans-unit>
+            <trans-unit id="module.empty.message"><source>Once event records exist, they show up here.</source><target>Sobald Termin-Datensätze angelegt sind, erscheinen sie hier.</target></trans-unit>
+
+            <trans-unit id="module.noStorage.title"><source>No storage folder configured</source><target>Kein Speicherordner konfiguriert</target></trans-unit>
+            <trans-unit id="module.noStorage.message"><source>Set a storage PID in the extension configuration (Admin Tools &gt; Extensions &gt; Rubin Events) to create new events straight from this module.</source><target>Hinterlege eine Storage-PID in der Extension-Konfiguration (Admin-Werkzeuge &gt; Erweiterungen &gt; Rubin Events), um neue Termine direkt aus diesem Modul anzulegen.</target></trans-unit>
+
+            <trans-unit id="module.missingStorage.title"><source>Storage folder does not exist</source><target>Speicherordner existiert nicht</target></trans-unit>
+            <trans-unit id="module.missingStorage.message"><source>The extension configuration points to page %s, which does not exist. Correct the storage PID under Admin Tools &gt; Extensions &gt; Rubin Events to create new events from here.</source><target>Die Extension-Konfiguration verweist auf Seite %s, die es nicht gibt. Korrigiere die Storage-PID unter Admin-Werkzeuge &gt; Erweiterungen &gt; Rubin Events, um von hier aus neue Termine anzulegen.</target></trans-unit>
+        </body>
+    </file>
+</xliff>

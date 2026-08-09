@@ -66,10 +66,18 @@
                                     </h5>
                                     <f:for each="{event.contacts}" as="contact">
                                         <div class="contact mb-2">
-                                            <div class="fw-semibold">{contact.firstname} {contact.lastname}</div>
-                                            <f:if condition="{contact.email}">
-                                                <a href="mailto:{contact.email}" class="text-break">{contact.email}</a>
+                                            <f:if condition="{contact.firstImage}">
+                                                <div class="photo">
+                                                    <f:image image="{contact.firstImage}" width="96c" height="96c"
+                                                             alt="{contact.firstName} {contact.lastName}" loading="lazy" />
+                                                </div>
                                             </f:if>
+                                            <div class="details">
+                                                <div class="fw-semibold">{contact.firstName} {contact.lastName}</div>
+                                                <f:if condition="{contact.email}">
+                                                    <a href="mailto:{contact.email}" class="text-break">{contact.email}</a>
+                                                </f:if>
+                                            </div>
                                         </div>
                                     </f:for>
                                 </div>

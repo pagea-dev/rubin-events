@@ -12,15 +12,20 @@
                 <f:then>
                     <f:switch expression="{settings.listStyle}">
                         <f:case value="0">
-                            <f:render partial="Event/TinySlider" arguments="{events: events, settings: settings, listPid: listPid}" />
+                            <f:render partial="Event/Slider" arguments="{events: events, settings: settings, listPid: listPid, loadSwiper: loadSwiper}" />
                         </f:case>
                         <f:case value="2">
-                            <f:render partial="Event/BsList" arguments="{events: events, settings: settings, listPid: listPid}" />
+                            <f:render partial="Event/BsList" arguments="{events: events, settings: settings, listPid: listPid, loadSwiper: loadSwiper}" />
                         </f:case>
                         <f:defaultCase>
-                            <f:render partial="Event/List" arguments="{events: events, settings: settings, listPid: listPid}" />
+                            <f:render partial="Event/List" arguments="{events: events, settings: settings, listPid: listPid, loadSwiper: loadSwiper}" />
                         </f:defaultCase>
                     </f:switch>
+
+                    <!-- One shell per plugin, filled by whichever trigger was clicked -->
+                    <f:if condition="{settings.btnMoreBehavior} != 1">
+                        <f:render partial="Event/Modal" arguments="{settings: settings}" />
+                    </f:if>
                 </f:then>
                 <f:else>
                     <f:translate key="LLL:EXT:rubin_events/Resources/Private/Language/locallang.xlf:list.empty" />

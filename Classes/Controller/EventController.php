@@ -12,6 +12,7 @@ namespace PageaDev\RubinEvents\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 use PageaDev\RubinEvents\Domain\Repository\EventRepository;
@@ -21,7 +22,8 @@ class EventController extends ActionController
 {
 
     public function __construct(
-        private readonly EventRepository $eventRepository
+        private readonly EventRepository $eventRepository,
+        private readonly ExtensionConfiguration $extensionConfiguration
     ) {}
 
     public function listAction(): ResponseInterface
@@ -37,7 +39,23 @@ class EventController extends ActionController
         $limit = (int)($this->settings['limit'] ?? 0);
         $this->view->assign('events', $this->eventRepository->findAllSorted($limit));
         $this->view->assign('listPid', $this->resolveListPid());
+        $this->view->assign('loadSwiper', $this->shouldLoadSwiper());
         return $this->htmlResponse();
+    }
+
+    /**
+     * Whether the bundled Swiper element should be shipped with the slider list style. Sites that
+     * already provide Swiper themselves switch this off in the extension configuration.
+     */
+    private function shouldLoadSwiper(): bool
+    {
+        try {
+            $configuration = $this->extensionConfiguration->get('rubin_events');
+        } catch (\Throwable) {
+            return false;
+        }
+
+        return (bool)($configuration['useSwiper'] ?? false);
     }
 
     /**

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-08-08T00:00:00Z" product-name="rubin_events">
+        <header/>
+        <body>
+            <trans-unit id="mlang_tabs_tab"><source>Events</source></trans-unit>
+            <trans-unit id="mlang_labels_tablabel"><source>Event overview</source></trans-unit>
+            <trans-unit id="mlang_labels_tabdescr"><source>Lists all event records, upcoming and past, and links straight into the record editor.</source></trans-unit>
+
+            <trans-unit id="module.upcoming"><source>Upcoming events</source></trans-unit>
+            <trans-unit id="module.upcoming.empty"><source>No upcoming events.</source></trans-unit>
+            <trans-unit id="module.past"><source>Past events</source></trans-unit>
+            <trans-unit id="module.past.empty"><source>No past events.</source></trans-unit>
+
+            <trans-unit id="module.col.start"><source>Start</source></trans-unit>
+            <trans-unit id="module.col.end"><source>End</source></trans-unit>
+            <trans-unit id="module.col.title"><source>Title</source></trans-unit>
+            <trans-unit id="module.col.location"><source>Location</source></trans-unit>
+            <trans-unit id="module.col.map"><source>Map</source></trans-unit>
+
+            <trans-unit id="module.action.edit"><source>Edit event</source></trans-unit>
+            <trans-unit id="module.button.new"><source>New event</source></trans-unit>
+            <trans-unit id="module.button.importExamples"><source>Import examples</source></trans-unit>
+
+            <trans-unit id="module.import.done"><source>%d example events and %d contacts created in the new folder "%s" (page %d).</source></trans-unit>
+            <trans-unit id="module.import.alreadyImported"><source>The example content is already there: folder "%s" (page %d). Delete that folder to import again.</source></trans-unit>
+            <trans-unit id="module.import.failed"><source>The import failed: %s</source></trans-unit>
+
+            <trans-unit id="module.config.intro"><source>Extension configuration under Admin Tools &gt; Extensions &gt; Rubin Events:</source></trans-unit>
+            <trans-unit id="module.config.notSet"><source>not set</source></trans-unit>
+            <trans-unit id="module.config.state.0"><source>All settings are in order</source></trans-unit>
+            <trans-unit id="module.config.state.1"><source>Some settings need attention</source></trans-unit>
+            <trans-unit id="module.config.state.2"><source>No setting is usable</source></trans-unit>
+            <trans-unit id="module.config.hint.storagePid"><source>Must point to an existing page — new events and the example import are created there.</source></trans-unit>
+            <trans-unit id="module.config.hint.defaultZoom"><source>Whole number between 1 (world) and 18 (street level).</source></trans-unit>
+            <trans-unit id="module.config.hint.defaultLat"><source>Latitude between -90 and 90, e.g. 51.5.</source></trans-unit>
+            <trans-unit id="module.config.hint.defaultLon"><source>Longitude between -180 and 180, e.g. 9.5.</source></trans-unit>
+
+            <trans-unit id="module.empty.title"><source>No events yet</source></trans-unit>
+            <trans-unit id="module.empty.message"><source>Once event records exist, they show up here.</source></trans-unit>
+
+            <trans-unit id="module.noStorage.title"><source>No storage folder configured</source></trans-unit>
+            <trans-unit id="module.noStorage.message"><source>Set a storage PID in the extension configuration (Admin Tools &gt; Extensions &gt; Rubin Events) to create new events straight from this module.</source></trans-unit>
+
+            <trans-unit id="module.missingStorage.title"><source>Storage folder does not exist</source></trans-unit>
+            <trans-unit id="module.missingStorage.message"><source>The extension configuration points to page %s, which does not exist. Correct the storage PID under Admin Tools &gt; Extensions &gt; Rubin Events to create new events from here.</source></trans-unit>
+        </body>
+    </file>
+</xliff>

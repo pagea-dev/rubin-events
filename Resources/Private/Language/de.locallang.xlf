@@ -40,9 +40,13 @@
             <trans-unit id="weekday.6"><source>Saturday</source><target>Samstag</target></trans-unit>
             <trans-unit id="weekday.7"><source>Sunday</source><target>Sonntag</target></trans-unit>
 
-            <!-- TinySlider buttons -->
-            <trans-unit id="tinyslider.readmore"><source>More info</source><target>Mehr Infos</target></trans-unit>
-            <trans-unit id="tinyslider.allEvents"><source>All events</source><target>Alle Termine</target></trans-unit>
+            <!-- Slider buttons -->
+            <trans-unit id="slider.readmore"><source>More info</source><target>Mehr Infos</target></trans-unit>
+            <trans-unit id="slider.allEvents"><source>All events</source><target>Alle Termine</target></trans-unit>
+
+            <!-- Modal (compact detail view) -->
+            <trans-unit id="modal.label"><source>Event details</source><target>Termin-Details</target></trans-unit>
+            <trans-unit id="modal.close"><source>Close</source><target>Schließen</target></trans-unit>
 
             <!-- Empty state messages -->
             <trans-unit id="list.empty"><source>No upcoming events found.</source><target>Keine anstehenden Termine gefunden.</target></trans-unit>

@@ -1,0 +1,58 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:r="http://typo3.org/ns/PageaDev/RubinEvents/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <!--
+        "More info" trigger.
+
+        btnMoreBehavior 1 links to the configured detail page. Anything else — including an unset
+        field, which is the case for the archive plugin — opens the modal, and the trigger then
+        carries everything the modal shows in its data attributes.
+
+        Arguments: event, settings, listPid, class, variant ('icon' renders an arrow instead of a label)
+    -->
+
+    <f:variable name="moreLabel"><f:translate key="slider.readmore" extensionName="RubinEvents" /></f:variable>
+    <f:variable name="timeSuffix"><f:translate key="bslist.time.suffix" extensionName="RubinEvents" /></f:variable>
+
+    <!-- Icon-only buttons need the label for screen readers; an empty aria-label is ignored -->
+    <f:variable name="ariaLabel"><f:if condition="{variant} == 'icon'">{moreLabel}</f:if></f:variable>
+
+    <!-- Kept on one line: everything in here ends up verbatim in a data attribute -->
+    <f:variable name="startLabel"><r:format.localizedDate date="{event.eventStart}" format="d. M Y, H:i" /> {timeSuffix}</f:variable>
+    <f:variable name="endLabel"><f:if condition="{event.eventEnd}"><r:format.localizedDate date="{event.eventEnd}" format="d. M Y, H:i" /> {timeSuffix}</f:if></f:variable>
+
+    <f:if condition="{settings.btnMoreBehavior} == 1">
+        <f:then>
+            <f:link.action class="{class}" pageUid="{settings.pidShow}" action="show"
+                           arguments="{event: event, pidList: listPid}"
+                           additionalAttributes="{'aria-label': ariaLabel}">
+                <f:render section="Label" arguments="{variant: variant, moreLabel: moreLabel}" />
+            </f:link.action>
+        </f:then>
+        <f:else>
+            <button type="button"
+                    class="{class}"
+                    aria-label="{ariaLabel}"
+                    data-rubin-event-modal
+                    data-title="{event.title}"
+                    data-date="{startLabel}"
+                    data-date-end="{endLabel}"
+                    data-location="{event.location}"
+                    data-teaser="{event.teaser}"
+                    data-description="{event.description}"
+                    data-lat="{event.lat}"
+                    data-lon="{event.lon}">
+                <f:render section="Label" arguments="{variant: variant, moreLabel: moreLabel}" />
+            </button>
+        </f:else>
+    </f:if>
+
+    <f:section name="Label">
+        <f:if condition="{variant} == 'icon'">
+            <f:then><i class="rubinicon-arrow_forward" aria-hidden="true"></i></f:then>
+            <f:else>{moreLabel}</f:else>
+        </f:if>
+    </f:section>
+
+</html>

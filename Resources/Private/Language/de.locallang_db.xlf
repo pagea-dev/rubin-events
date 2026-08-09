@@ -166,8 +166,8 @@
                 <target>Listenstil</target>
             </trans-unit>
             <trans-unit id="flexform.settings.listStyle.0">
-                <source>Slider (requires TinySlider)</source>
-                <target>Slider (erfordert TinySlider)</target>
+                <source>Slider (Swiper)</source>
+                <target>Slider (Swiper)</target>
             </trans-unit>
             <trans-unit id="flexform.settings.listStyle.1">
                 <source>Normal Table</source>
