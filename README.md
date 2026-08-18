@@ -1,3 +1,5 @@
+[![TYPO3 compatibility](https://img.shields.io/badge/TYPO3-13.4%20%7C%2014.3-ff8700?maxAge=3600&logo=typo3)](https://get.typo3.org/)
+
 # Rubin Events
 
 **Event management for TYPO3 — done right.**
