@@ -50,6 +50,11 @@
             <trans-unit id="module.noStorage.title"><source>No storage folder configured</source><target>Kein Speicherordner konfiguriert</target></trans-unit>
             <trans-unit id="module.noStorage.message"><source>Set a storage PID in the extension configuration (Admin Tools &gt; Extensions &gt; Rubin Events) to create new events straight from this module.</source><target>Hinterlege eine Storage-PID in der Extension-Konfiguration (Admin-Werkzeuge &gt; Erweiterungen &gt; Rubin Events), um neue Termine direkt aus diesem Modul anzulegen.</target></trans-unit>
 
+            <trans-unit id="module.branding.cta.title"><source>Found a bug?</source><target>Einen Fehler gefunden?</target></trans-unit>
+            <trans-unit id="module.branding.cta.text"><source>Something not working as it should, or a feature missing? Report it on GitHub and it gets looked at.</source><target>Etwas funktioniert nicht wie es soll oder eine Funktion fehlt? Melde es auf GitHub, dann sehen wir es uns an.</target></trans-unit>
+            <trans-unit id="module.branding.cta.button"><source>Report an issue</source><target>Fehler melden</target></trans-unit>
+            <trans-unit id="module.branding.copyright"><source>Rubin Events %s — © Pagea Development</source><target>Rubin Events %s — © Pagea Development</target></trans-unit>
+
             <trans-unit id="module.missingStorage.title"><source>Storage folder does not exist</source><target>Speicherordner existiert nicht</target></trans-unit>
             <trans-unit id="module.missingStorage.message"><source>The extension configuration points to page %s, which does not exist. Correct the storage PID under Admin Tools &gt; Extensions &gt; Rubin Events to create new events from here.</source><target>Die Extension-Konfiguration verweist auf Seite %s, die es nicht gibt. Korrigiere die Storage-PID unter Admin-Werkzeuge &gt; Erweiterungen &gt; Rubin Events, um von hier aus neue Termine anzulegen.</target></trans-unit>
         </body>

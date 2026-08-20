@@ -29,6 +29,7 @@ use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
@@ -85,7 +86,29 @@ final class EventModuleController
             'newEventUrl' => $this->buildNewRecordUrl($returnUrl),
             'configuration' => $this->configurationCheck->settings(),
             'configurationState' => $this->configurationCheck->state(),
+            // Shown in the module footer next to the "report an issue" button, where it is the one
+            // detail every bug report needs
+            'extensionVersion' => $this->extensionVersion(),
         ])->renderResponse('Backend/EventList');
+    }
+
+    /**
+     * The version the extension declares about itself, for the module footer.
+     *
+     * Deliberately read from ext_emconf.php rather than through
+     * ExtensionManagementUtility::getExtensionVersion(): that one reports the Composer package
+     * version, which is "dev-main" in a path-repository checkout — the way this extension is
+     * developed. ext_emconf.php is the single source for the version and reads the same in every
+     * installation type.
+     */
+    private function extensionVersion(): string
+    {
+        $_EXTKEY = 'rubin_events';
+        $EM_CONF = [];
+
+        require ExtensionManagementUtility::extPath($_EXTKEY) . 'ext_emconf.php';
+
+        return (string)($EM_CONF[$_EXTKEY]['version'] ?? '');
     }
 
     /**

@@ -1,3 +1,10 @@
+<div align="center">
+  
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/pageadev)
+[![TYPO3 13.4](https://img.shields.io/badge/TYPO3-13.4-ff8700?maxAge=3600&logo=typo3)](https://get.typo3.org/)
+[![TYPO3 14.3](https://img.shields.io/badge/TYPO3-14.3-ff8700?maxAge=3600&logo=typo3)](https://get.typo3.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+
 # Rubin Events
 
 **Event management for TYPO3 — done right.**
@@ -6,7 +13,20 @@ Rubin Events is a lightweight yet powerful TYPO3 extension for creating, managin
 events. It ships with an editor-friendly backend module, a built-in map picker (OpenStreetMap /
 Leaflet) for event locations, and flexible frontend output as list, slider or archive. Built for
 TYPO3 v13 and v14 on PHP 8.1+, following current Extbase best practices — no legacy code, no
-unnecessary dependencies.
+unnecessary dependencies.<br><br>
+
+### ☕ Using the extension commercially?
+
+Support the development and keep the updates coming. Even 1€ helps :)
+
+<a href="https://ko-fi.com/pageadev">
+  <img src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" alt="Buy me a coffee at ko-fi.com" height="45">
+</a>
+
+</div>
+
+
+
 
 ---
 

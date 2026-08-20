@@ -50,6 +50,11 @@
             <trans-unit id="module.noStorage.title"><source>No storage folder configured</source></trans-unit>
             <trans-unit id="module.noStorage.message"><source>Set a storage PID in the extension configuration (Admin Tools &gt; Extensions &gt; Rubin Events) to create new events straight from this module.</source></trans-unit>
 
+            <trans-unit id="module.branding.cta.title"><source>Found a bug?</source></trans-unit>
+            <trans-unit id="module.branding.cta.text"><source>Something not working as it should, or a feature missing? Report it on GitHub and it gets looked at.</source></trans-unit>
+            <trans-unit id="module.branding.cta.button"><source>Report an issue</source></trans-unit>
+            <trans-unit id="module.branding.copyright"><source>Rubin Events %s — © Pagea Development</source></trans-unit>
+
             <trans-unit id="module.missingStorage.title"><source>Storage folder does not exist</source></trans-unit>
             <trans-unit id="module.missingStorage.message"><source>The extension configuration points to page %s, which does not exist. Correct the storage PID under Admin Tools &gt; Extensions &gt; Rubin Events to create new events from here.</source></trans-unit>
         </body>
